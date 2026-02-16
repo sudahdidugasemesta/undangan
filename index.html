@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Pernikahan – Sudah Diduga Semesta</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{background:#0b0b0b;color:#fff;overflow-x:hidden}
+
+/* ===================== */
+/* NETFLIX OPENING */
+/* ===================== */
+.netflix-opening{
+ position:fixed;inset:0;background:#000;z-index:10000;
+ display:flex;align-items:center;justify-content:center;
+ animation:fadeOut 3s forwards;animation-delay:2s;
+}
+.netflix-opening h1{
+ color:#e50914;font-size:64px;letter-spacing:4px;
+ animation:zoomIn 2s ease-out;
+}
+@keyframes zoomIn{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes fadeOut{to{opacity:0;visibility:hidden}}
+
+/* ===================== */
+/* PROFILE SELECT SCREEN */
+/* ===================== */
+.profile-screen{
+ position:fixed;inset:0;background:#000;display:flex;
+ flex-direction:column;align-items:center;justify-content:center;
+ z-index:9999;text-align:center
+}
+.profile-screen h1{color:#e50914;font-size:56px;margin-bottom:20px;letter-spacing:3px}
+.profile-screen p{opacity:.8;margin-bottom:25px}
+
+.profile-list{display:flex;gap:40px;margin-bottom:20px}
+.profile{cursor:pointer;text-align:center}
+.profile img{width:120px;height:120px;border-radius:10px;object-fit:cover;border:3px solid transparent;transition:.3s}
+.profile:hover img{border-color:#e50914}
+.profile span{display:block;margin-top:10px}
+
+.open-btn{border:1px solid #888;background:none;color:#fff;padding:10px 20px;margin-top:20px;cursor:pointer}
+
+/* Guest badge */
+.guest-badge{position:fixed;top:15px;right:20px;background:#111;padding:8px 14px;border-radius:20px;font-size:14px;opacity:.8;z-index:10}
+
+/* ===================== */
+/* HERO */
+/* ===================== */
+.hero{position:relative;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:40px}
+.hero video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.95),rgba(0,0,0,.4));z-index:-1}
+.hero h1{font-size:48px;font-weight:600}
+.hero p{opacity:.85;margin:10px 0}
+.play-btn{background:#e50914;color:#fff;border:none;padding:12px 24px;font-size:16px;border-radius:4px;cursor:pointer;margin-top:15px}
+.badges{margin-top:10px;font-size:14px;opacity:.85}
+.coming{display:inline-block;margin:12px 0;background:#e50914;padding:6px 12px;border-radius:20px}
+.description{max-width:700px;margin-top:10px;line-height:1.6;color:#ddd;white-space:pre-line}
+
+.section{padding:60px 20px;max-width:1100px;margin:auto}
+.section h2{margin-bottom:20px}
+
+/* Cast */
+.cast-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px}
+.cast-card{background:#141414;border-radius:10px;padding:20px;text-align:center}
+.cast-card img{width:100%;border-radius:10px;margin-bottom:15px}
+.cast-card p{opacity:.8;font-size:14px}
+
+/* ===================== */
+/* EPISODE LIST (VERTICAL) */
+/* ===================== */
+.episode-list{display:flex;flex-direction:column;gap:25px}
+.episode-row{display:grid;grid-template-columns:40px 160px 1fr 60px;gap:15px;align-items:center;background:#111;padding:12px;border-radius:8px;cursor:pointer;transition:.2s}
+.episode-row:hover{background:#1c1c1c}
+
+.episode-num{font-size:22px;opacity:.7;text-align:center}
+.episode-thumb img{width:160px;height:90px;object-fit:cover;border-radius:6px}
+.episode-info strong{display:block;margin-bottom:6px}
+.episode-info p{opacity:.8;font-size:14px}
+.episode-duration{text-align:right;opacity:.6}
+
+/* Popup */
+.popup{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:999}
+.popup-content{background:#111;max-width:700px;width:92%;border-radius:10px;overflow:hidden}
+.popup-content img{width:100%;max-height:300px;object-fit:cover}
+.popup-content div{padding:20px}
+.popup-content p{line-height:1.6;opacity:.9}
+
+.countdown{font-size:28px;margin-top:10px}
+
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.gallery img{width:100%;border-radius:6px}
+
+form{display:flex;flex-direction:column;gap:10px;max-width:400px}
+input,select,textarea,button{padding:10px;border-radius:5px;border:none}
+button{background:#e50914;color:#fff;cursor:pointer}
+
+footer{padding:30px;text-align:center;background:#000;margin-top:60px}
+</style>
+</head>
+
+<body>
+
+<!-- Netflix opening -->
+<div class="netflix-opening"><h1>NIKAHFIX</h1></div>
+
+<!-- Music -->
+<audio id="bgMusic" src="music.mp3" loop></audio>
+
+<div class="guest-badge" id="guestBadge"></div>
+
+<!-- PROFILE PAGE -->
+<div class="profile-screen" id="profileScreen">
+ <h1>NIKAHFIX</h1>
+ <p>Who's watching?</p>
+ <div class="profile-list">
+  <div class="profile">
+   <img src="guest-avatar.png"><span id="guest1">Nama Tamu</span>
+  </div>
+  <div class="profile" id="profile2wrap">
+   <img src="guest-avatar.png"><span id="guest2">Pasangan</span>
+  </div>
+ </div>
+ <button class="open-btn" onclick="openInvitation()">OPEN INVITATION</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+ <video autoplay muted loop>
+  <source src="video-cover.mp4" type="video/mp4">
+ </video>
+
+ <h1>SUDAH DIDUGA SEMESTA</h1>
+ <p>Romance, Comedy</p>
+ <div class="badges">100% Match • SU • 4K • HD</div>
+ <div class="coming">Now Streaming: Wedding Episode</div>
+
+ <div class="description">
+Pia dan Ghozi sudah bersahabat sejak 2010.
+Ghozi jatuh hati duluan, tapi denial membuatnya menjauh… sampai Pia hampir pergi.
+Sekarang, persahabatan mereka diuji cinta, tawa, dan keberanian untuk jujur—dan akhirnya… nikah.
+#SudahDidugaSemesta
+ </div>
+
+ <button class="play-btn" onclick="scrollToEpisodes()">▶ Play Invitation</button>
+</section>
+
+<!-- CAST -->
+<section class="section">
+<h2>Cast</h2>
+<div class="cast-grid">
+ <div class="cast-card">
+  <img src="foto-ghozi.jpg"><h3>Ghozi</h3>
+  <p>Putra dari Bapak ... dan Ibu ...</p>
+ </div>
+ <div class="cast-card">
+  <img src="foto-silvia.jpg"><h3>Silvia</h3>
+  <p>Putri dari Bapak ... dan Ibu ...</p>
+ </div>
+</div>
+</section>
+
+<!-- EVENT -->
+<section class="section">
+<h2>Wedding Schedule</h2>
+<p>Akad: 10 Januari 2027 — 08:00 WIB</p>
+<p>Resepsi: 10 Januari 2027 — 11:00 WIB</p>
+<div class="countdown" id="countdown"></div>
+</section>
+
+<!-- EPISODES -->
+<section class="section" id="episodes">
+<h2>Episodes</h2>
+
+<div class="episode-list">
+
+<div class="episode-row" onclick="openPopup('episode1.jpg','Episode 1: Teman Sejak SMA',episodeText[0])">
+ <div class="episode-num">1</div>
+ <div class="episode-thumb"><img src="episode1.jpg"></div>
+ <div class="episode-info">
+  <strong>Teman Sejak SMA</strong>
+  <p>Pia & Ghozi kenal sejak 2010, teman sekelas yang langsung klik.</p>
+ </div>
+ <div class="episode-duration">24m</div>
+</div>
+
+<div class="episode-row" onclick="openPopup('episode2.jpg','Episode 2: Ghozi Mulai Jatuh Hati',episodeText[1])">
+ <div class="episode-num">2</div>
+ <div class="episode-thumb"><img src="episode2.jpg"></div>
+ <div class="episode-info">
+  <strong>Ghozi Mulai Jatuh Hati</strong>
+  <p>Ghozi sadar Pia lebih dari sahabat, tapi denial.</p>
+ </div>
+ <div class="episode-duration">24m</div>
+</div>
+
+<div class="episode-row" onclick="openPopup('episode3.jpg','Episode 3: Pernyataan yang Ditunda',episodeText[2])">
+ <div class="episode-num">3</div>
+ <div class="episode-thumb"><img src="episode3.jpg"></div>
+ <div class="episode-info">
+  <strong>Pernyataan yang Ditunda</strong>
+  <p>Ucapan Pia bikin Ghozi takut kehilangan.</p>
+ </div>
+ <div class="episode-duration">24m</div>
+</div>
+
+<div class="episode-row" onclick="openPopup('episode4.jpg','Episode 4: Sahabat Jadi Sah',episodeText[3])">
+ <div class="episode-num">4</div>
+ <div class="episode-thumb"><img src="episode4.jpg"></div>
+ <div class="episode-info">
+  <strong>Sahabat Jadi Sah</strong>
+  <p>Yang tadinya teman cerita kini menjadi teman hidup.</p>
+ </div>
+ <div class="episode-duration">24m</div>
+</div>
+
+</div>
+</section>
+
+<!-- POPUP -->
+<div class="popup" id="popup" onclick="closePopup()">
+ <div class="popup-content" onclick="event.stopPropagation()">
+  <img id="popupImg">
+  <div>
+   <h3 id="popupTitle"></h3>
+   <p id="popupDesc"></p>
+  </div>
+ </div>
+</div>
+
+<!-- RSVP -->
+<section class="section">
+<h2>RSVP</h2>
+<form onsubmit="submitRSVP(event)">
+ <input id="rsvpName" placeholder="Nama" required>
+ <select id="rsvpAttend"><option>Hadir</option><option>Tidak Hadir</option></select>
+ <textarea id="rsvpMsg" placeholder="Ucapan"></textarea>
+ <button>Kirim RSVP</button>
+</form>
+</section>
+
+<footer>Streaming Love Story Invitation</footer>
+
+<script>
+function scrollToEpisodes(){document.getElementById('episodes').scrollIntoView({behavior:'smooth'})}
+function openInvitation(){document.getElementById("profileScreen").style.display="none";document.getElementById("bgMusic").play().catch(()=>{})}
+
+/* ===== NAME PARSER ===== */
+const rawQuery = window.location.search.substring(1);
+let names = rawQuery.split("&");
+let guestA = "Nama Tamu";
+let guestB = "";
+names.forEach(p=>{if(p.startsWith("to=")) guestA = decodeURIComponent(p.replace("to=","")); else if(p) guestB = decodeURIComponent(p)});
+if(guestA){document.getElementById("guest1").innerText = guestA;document.getElementById("guestBadge").innerText = guestA}
+if(guestB){document.getElementById("guest2").innerText = guestB}else{document.getElementById("profile2wrap").style.display="none"}
+
+/* ===== EPISODE TEXT (FULL STORY) ===== */
+const episodeText = [
+`Pia & Ghozi kenal sejak 2010 sebagai teman sekelas yang langsung klik.
+Walau setelahnya mereka berada di kelas dan kampus berbeda, komunikasi tidak pernah benar-benar putus.
+Dari tugas sekolah, cerita keseharian, sampai curhat masalah hidup — semua dilalui bersama.
+Tak ada yang menyangka persahabatan sederhana itu ternyata menjadi awal perjalanan panjang menuju pernikahan.`,
+
+`Seiring waktu, Ghozi mulai menyadari perasaannya berubah.
+Namun ketakutan merusak persahabatan membuatnya memilih menyangkal perasaan itu.
+Ia mencoba menjauh, berpura‑pura biasa saja, meski sebenarnya takut kehilangan Pia.
+Sementara Pia tetap menjadi teman terbaik yang selalu ada tanpa tahu konflik batin yang terjadi.`,
+
+`Suatu percakapan membuat Ghozi sadar bahwa waktu tidak selalu menunggu.
+Ketakutan kehilangan justru lebih besar jika ia tidak pernah jujur.
+Akhirnya ia mengungkapkan perasaannya.
+Pia hanya tertawa kecil — karena sebenarnya ia sudah mengetahui semuanya sejak lama.
+Yang ditunggu hanyalah keberanian Ghozi untuk mengakuinya.`,
+
+`Ghozi membuktikan keseriusannya lewat tindakan, bukan sekadar kata.
+Perjalanan mereka dipenuhi tawa, kompromi, dan tumbuh bersama sebagai pasangan.
+Hingga akhirnya, dua sahabat itu berdiri di pelaminan yang sama.
+Yang dulu hanya teman cerita, kini menjadi teman hidup selamanya.`
+];
+
+/* ===== POPUP ===== */
+function openPopup(img,title,desc){
+ document.getElementById("popupImg").src = img;
+ document.getElementById("popupTitle").innerText = title;
+ document.getElementById("popupDesc").innerText = desc;
+ document.getElementById("popup").style.display = "flex";
+}
+function closePopup(){document.getElementById("popup").style.display="none"}
+
+/* RSVP placeholder */
+function submitRSVP(e){e.preventDefault();alert("RSVP terkirim (bisa dihubungkan ke Google Sheet)")}
+
+/* COUNTDOWN */
+const target = new Date("Jan 10, 2027 08:00:00").getTime();
+setInterval(()=>{
+ let now = new Date().getTime();
+ let gap = target - now;
+ let d = Math.floor(gap/(1000*60*60*24));
+ let h = Math.floor((gap%(1000*60*60*24))/(1000*60*60));
+ let m = Math.floor((gap%(1000*60*60))/(1000*60));
+ document.getElementById("countdown").innerText = d+" days "+h+" hours "+m+" minutes";
+},1000);
+</script>
+
+</body>
+</html>
