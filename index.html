@@ -62,14 +62,12 @@ body{background:#0b0b0b;color:#fff;overflow-x:hidden}
 
 /* Episodes Netflix style */
 .episode-list{display:flex;flex-direction:column;gap:22px}
-.episode-row{display:flex;gap:15px;background:#111;padding:12px;border-radius:8px;cursor:pointer;transition:.2s}
+.episode-row{background:#111;padding:14px;border-radius:8px;cursor:pointer;transition:.2s}
 .episode-row:hover{background:#1c1c1c}
 
-.episode-num{font-size:20px;width:24px;opacity:.6;margin-top:6px}
+.episode-thumb img{width:100%;max-width:360px;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:6px}
 
-.episode-thumb img{width:150px;height:85px;object-fit:cover;border-radius:6px}
-
-.episode-info{flex:1}
+.episode-info{margin-top:10px}
 .episode-info strong{display:block;margin-bottom:6px;font-size:16px}
 .episode-info p{opacity:.75;font-size:14px;line-height:1.35}
 .readmore{margin-top:6px;font-size:12px;opacity:.55}
@@ -82,15 +80,6 @@ body{background:#0b0b0b;color:#fff;overflow-x:hidden}
 .popup-content p{line-height:1.6;opacity:.9}
 .popup-close{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
 
-.countdown{font-size:26px;margin-top:10px}
-
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.gallery img{width:100%;border-radius:6px}
-
-form{display:flex;flex-direction:column;gap:10px;max-width:400px}
-input,select,textarea,button{padding:10px;border-radius:5px;border:none}
-button{background:#e50914;color:#fff;cursor:pointer}
-
 footer{padding:30px;text-align:center;background:#000;margin-top:60px}
 
 /* MOBILE */
@@ -98,7 +87,6 @@ footer{padding:30px;text-align:center;background:#000;margin-top:60px}
  .hero-video{height:45vh}
  .hero-info h1{font-size:22px}
  .description{font-size:14px}
- .episode-thumb img{width:120px;height:70px}
 }
 </style>
 </head>
@@ -156,21 +144,37 @@ Sekarang, persahabatan mereka diuji cinta, tawa, dan keberanian untuk jujur—da
 <div class="episode-list">
 
 <div class="episode-row" onclick="openPopup('episode1.JPG','Episode 1',episodeText[0])">
- <div class="episode-num">1</div>
  <div class="episode-thumb"><img src="episode1.JPG"></div>
  <div class="episode-info">
-  <strong>Teman Sejak SMA</strong>
+  <strong>1. Teman Sejak SMA</strong>
   <p>Pia & Ghozi kenal sejak 2010, teman sekelas yang langsung klik.</p>
   <div class="readmore">Tap to read more</div>
  </div>
 </div>
 
 <div class="episode-row" onclick="openPopup('episode2.JPG','Episode 2',episodeText[1])">
- <div class="episode-num">2</div>
  <div class="episode-thumb"><img src="episode2.JPG"></div>
  <div class="episode-info">
-  <strong>Ghozi Mulai Jatuh Hati</strong>
+  <strong>2. Ghozi Mulai Jatuh Hati</strong>
   <p>Ghozi sadar Pia lebih dari sahabat, tapi denial.</p>
+  <div class="readmore">Tap to read more</div>
+ </div>
+</div>
+
+<div class="episode-row" onclick="openPopup('episode3.JPG','Episode 3',episodeText[2])">
+ <div class="episode-thumb"><img src="episode3.JPG"></div>
+ <div class="episode-info">
+  <strong>3. Pernyataan yang Ditunda</strong>
+  <p>Ucapan Pia bikin Ghozi takut kehilangan.</p>
+  <div class="readmore">Tap to read more</div>
+ </div>
+</div>
+
+<div class="episode-row" onclick="openPopup('episode4.JPG','Episode 4',episodeText[3])">
+ <div class="episode-thumb"><img src="episode4.JPG"></div>
+ <div class="episode-info">
+  <strong>4. Sahabat Jadi Sah</strong>
+  <p>Yang tadinya teman cerita kini menjadi teman hidup.</p>
   <div class="readmore">Tap to read more</div>
  </div>
 </div>
@@ -215,7 +219,12 @@ Walau setelahnya mereka berada di kelas dan kampus berbeda, komunikasi tidak per
 Tak ada yang menyangka persahabatan sederhana itu menjadi awal perjalanan menuju pernikahan.`,
 `Seiring waktu Ghozi sadar perasaannya berubah.
 Namun ketakutan merusak persahabatan membuatnya memilih menyangkal.
-Hingga akhirnya ia memilih jujur terhadap perasaannya.`
+Hingga akhirnya ia memilih jujur terhadap perasaannya.`,
+`Ucapan Pia membuat Ghozi sadar waktu tidak selalu menunggu.
+Ia akhirnya mengungkapkan perasaan yang selama ini disimpan.
+Pia tersenyum karena sebenarnya sudah mengetahui semuanya sejak lama.`,
+`Perjalanan panjang dua sahabat berujung pada hari bahagia.
+Yang dulu hanya teman cerita kini menjadi teman hidup selamanya.`
 ];
 
 function openPopup(img,title,desc){document.getElementById('popupImg').src=img;document.getElementById('popupTitle').innerText=title;document.getElementById('popupDesc').innerText=desc;document.getElementById('popup').style.display='flex'}
