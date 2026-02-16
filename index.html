@@ -55,12 +55,13 @@ body{background:#0b0b0b;color:#fff;overflow-x:hidden}
 .section{padding:50px 20px;max-width:1100px;margin:auto}
 .section h2{margin-bottom:20px;font-size:24px}
 
+/* Cast */
 .cast-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px}
 .cast-card{background:#141414;border-radius:10px;padding:20px;text-align:center}
 .cast-card img{width:100%;border-radius:10px;margin-bottom:15px}
 .cast-card p{opacity:.8;font-size:14px}
 
-/* Episodes Netflix style */
+/* Episodes */
 .episode-list{display:flex;flex-direction:column;gap:22px}
 .episode-row{background:#111;padding:14px;border-radius:8px;cursor:pointer;transition:.2s}
 .episode-row:hover{background:#1c1c1c}
@@ -80,9 +81,10 @@ body{background:#0b0b0b;color:#fff;overflow-x:hidden}
 .popup-content p{line-height:1.6;opacity:.9}
 .popup-close{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
 
+.countdown{font-size:26px;margin-top:10px}
+
 footer{padding:30px;text-align:center;background:#000;margin-top:60px}
 
-/* MOBILE */
 @media (max-width:768px){
  .hero-video{height:45vh}
  .hero-info h1{font-size:22px}
@@ -137,6 +139,31 @@ Sekarang, persahabatan mereka diuji cinta, tawa, dan keberanian untuk jujur—da
 <span>#SudahDidugaSemesta</span>
   </div>
  </div>
+</section>
+
+<!-- CAST (RESTORED) -->
+<section class="section">
+<h2>Cast</h2>
+<div class="cast-grid">
+ <div class="cast-card">
+  <img src="foto-ghozi.jpg">
+  <h3>Ghozi</h3>
+  <p>Putra dari Bapak ... dan Ibu ...</p>
+ </div>
+ <div class="cast-card">
+  <img src="foto-silvia.jpg">
+  <h3>Silvia</h3>
+  <p>Putri dari Bapak ... dan Ibu ...</p>
+ </div>
+</div>
+</section>
+
+<!-- WEDDING DATE (RESTORED) -->
+<section class="section">
+<h2>Wedding Schedule</h2>
+<p>Akad: 5 April 2026 — 08:00 WIB</p>
+<p>Resepsi: 5 April 2026 — 11:00 WIB</p>
+<div class="countdown" id="countdown"></div>
 </section>
 
 <section class="section" id="episodes">
@@ -229,7 +256,18 @@ Yang dulu hanya teman cerita kini menjadi teman hidup selamanya.`
 
 function openPopup(img,title,desc){document.getElementById('popupImg').src=img;document.getElementById('popupTitle').innerText=title;document.getElementById('popupDesc').innerText=desc;document.getElementById('popup').style.display='flex'}
 function closePopup(){document.getElementById('popup').style.display='none'}
+
+const target=new Date("Apr 5, 2026 08:00:00").getTime();
+setInterval(()=>{
+ let now=new Date().getTime();
+ let gap=target-now;
+ let d=Math.floor(gap/(1000*60*60*24));
+ let h=Math.floor((gap%(1000*60*60*24))/(1000*60*60));
+ let m=Math.floor((gap%(1000*60*60))/(1000*60));
+ document.getElementById('countdown').innerText=d+" days "+h+" hours "+m+" minutes";
+},1000);
 </script>
 
 </body>
 </html>
+
