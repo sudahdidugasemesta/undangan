@@ -63,22 +63,26 @@ body{background:#0b0b0b;color:#fff;overflow-x:hidden}
 
 .guest-badge{position:fixed;top:15px;right:20px;background:#111;padding:8px 14px;border-radius:20px;font-size:14px;opacity:.8;z-index:10}
 
+/* Minimalist music button */
 .music-control{
- position:fixed;bottom:20px;right:20px;background:#111;border-radius:50%;
- width:48px;height:48px;display:flex;align-items:center;justify-content:center;
- cursor:pointer;opacity:.85;z-index:20;font-size:20px
+ position:fixed;bottom:20px;right:20px;background:#2a2a2a;border-radius:50%;
+ width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+ cursor:pointer;opacity:.85;z-index:20
 }
+.music-control svg{width:20px;height:20px;fill:#ccc}
 
 /* ===================== */
 /* HERO */
 /* ===================== */
-.hero{position:relative;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:40px}
-.hero video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,.2));z-index:-1}
-.hero h1{font-size:48px;font-weight:600}
-.hero p{opacity:.85;margin:10px 0}
-.badges{margin-top:10px;font-size:14px;opacity:.85}
-.description{max-width:700px;margin-top:10px;line-height:1.6;color:#ddd;white-space:pre-line}
+.hero{width:100%;background:#000}
+.hero-video{width:100%;height:60vh;overflow:hidden;position:relative}
+.hero-video video{width:100%;height:100%;object-fit:cover}
+
+.hero-info{padding:25px 20px 40px;max-width:1100px;margin:auto}
+.hero-info h1{font-size:36px;margin-bottom:6px}
+.hero-info p{opacity:.85;margin:4px 0}
+.badges{margin-top:8px;font-size:14px;opacity:.85}
+.description{margin-top:12px;line-height:1.6;color:#ddd;white-space:pre-line}
 
 .section{padding:60px 20px;max-width:1100px;margin:auto}
 .section h2{margin-bottom:20px}
@@ -100,6 +104,7 @@ body{background:#0b0b0b;color:#fff;overflow-x:hidden}
 .episode-info strong{display:block;margin-bottom:6px}
 .episode-info p{opacity:.8;font-size:14px}
 .episode-duration{text-align:right;opacity:.6}
+.readmore{margin-top:6px;font-size:12px;opacity:.6}
 
 /* Popup */
 .popup{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:999}
@@ -127,9 +132,8 @@ footer{padding:30px;text-align:center;background:#000;margin-top:60px}
 
 /* MOBILE */
 @media (max-width:768px){
- .hero{padding:20px;height:100vh}
- .hero h1{font-size:28px}
- .description{font-size:14px}
+ .hero-video{height:45vh}
+ .hero-info h1{font-size:24px}
  .profile-list{flex-direction:row}
  .profile img{width:100px;height:100px}
  .episode-row{grid-template-columns:30px 110px 1fr}
@@ -152,7 +156,9 @@ footer{padding:30px;text-align:center;background:#000;margin-top:60px}
 <div class="netflix-opening"><h1>NIKAHFIX</h1></div>
 
 <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
-<div class="music-control" onclick="toggleMusic()" id="musicBtn">🔇</div>
+<div class="music-control" onclick="toggleMusic()" id="musicBtn">
+<svg viewBox="0 0 24 24"><path d="M5 9v6h4l5 5V4L9 9H5z"/></svg>
+</div>
 
 <div class="guest-badge" id="guestBadge"></div>
 
@@ -171,20 +177,25 @@ footer{padding:30px;text-align:center;background:#000;margin-top:60px}
  <button class="open-btn" onclick="openInvitation()">OPEN INVITATION</button>
 </div>
 
+<!-- HERO -->
 <section class="hero">
- <video id="heroVideo" autoplay muted loop playsinline preload="auto">
-  <source src="video-cover.mp4" type="video/mp4">
- </video>
+ <div class="hero-video">
+  <video id="heroVideo" autoplay muted loop playsinline preload="metadata">
+   <source src="video-cover.mp4" type="video/mp4">
+  </video>
+ </div>
 
- <h1>SUDAH DIDUGA SEMESTA</h1>
- <p>Romance, Comedy</p>
- <div class="badges">100% Match • SU • 4K • HD</div>
+ <div class="hero-info">
+  <h1>SUDAH DIDUGA SEMESTA</h1>
+  <p>Romance, Comedy</p>
+  <div class="badges">100% Match • SU • 4K • HD</div>
 
- <div class="description">
+  <div class="description">
 Pia dan Ghozi sudah bersahabat sejak 2010.
 Ghozi jatuh hati duluan, tapi denial membuatnya menjauh… sampai Pia hampir pergi.
 Sekarang, persahabatan mereka diuji cinta, tawa, dan keberanian untuk jujur—dan akhirnya… nikah.
 #SudahDidugaSemesta
+  </div>
  </div>
 </section>
 
@@ -219,6 +230,7 @@ Sekarang, persahabatan mereka diuji cinta, tawa, dan keberanian untuk jujur—da
  <div class="episode-info">
   <strong>Teman Sejak SMA</strong>
   <p>Pia & Ghozi kenal sejak 2010, teman sekelas yang langsung klik.</p>
+  <div class="readmore">Tap to read more</div>
  </div>
  <div class="episode-duration">24m</div>
 </div>
@@ -229,6 +241,7 @@ Sekarang, persahabatan mereka diuji cinta, tawa, dan keberanian untuk jujur—da
  <div class="episode-info">
   <strong>Ghozi Mulai Jatuh Hati</strong>
   <p>Ghozi sadar Pia lebih dari sahabat, tapi denial.</p>
+  <div class="readmore">Tap to read more</div>
  </div>
  <div class="episode-duration">24m</div>
 </div>
@@ -239,6 +252,7 @@ Sekarang, persahabatan mereka diuji cinta, tawa, dan keberanian untuk jujur—da
  <div class="episode-info">
   <strong>Pernyataan yang Ditunda</strong>
   <p>Ucapan Pia bikin Ghozi takut kehilangan.</p>
+  <div class="readmore">Tap to read more</div>
  </div>
  <div class="episode-duration">24m</div>
 </div>
@@ -249,6 +263,7 @@ Sekarang, persahabatan mereka diuji cinta, tawa, dan keberanian untuk jujur—da
  <div class="episode-info">
   <strong>Sahabat Jadi Sah</strong>
   <p>Yang tadinya teman cerita kini menjadi teman hidup.</p>
+  <div class="readmore">Tap to read more</div>
  </div>
  <div class="episode-duration">24m</div>
 </div>
@@ -291,13 +306,11 @@ function openInvitation(){
  const music=document.getElementById("bgMusic");
  music.muted=false;
  music.play().catch(()=>{});
- document.getElementById("musicBtn").innerText="🔊";
 }
 
 function toggleMusic(){
  const music=document.getElementById("bgMusic");
  music.muted=!music.muted;
- document.getElementById("musicBtn").innerText=music.muted?"🔇":"🔊";
 }
 
 /* Name parser */
@@ -320,7 +333,7 @@ if(guestB){
 }
 
 const episodeText = [
-`Pia & Ghozi kenal sejak 2010 sebagai teman sekelas yang selalu ribut seperti kucing dan anjing.
+`Pia & Ghozi kenal sejak 2010 sebagai teman sekelas yang langsung klik.
 Walau setelahnya mereka berada di kelas dan kampus berbeda, komunikasi tidak pernah benar-benar putus.
 Dari tugas sekolah, cerita keseharian, sampai curhat masalah hidup — semua dilalui bersama.
 Tak ada yang menyangka persahabatan sederhana itu ternyata menjadi awal perjalanan panjang menuju pernikahan.`,
