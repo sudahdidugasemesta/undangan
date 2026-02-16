@@ -99,6 +99,26 @@ input,select,textarea,button{padding:10px;border-radius:5px;border:none}
 button{background:#e50914;color:#fff;cursor:pointer}
 
 footer{padding:30px;text-align:center;background:#000;margin-top:60px}
+
+/* ===================== */
+/* MOBILE FIX */
+/* ===================== */
+@media (max-width: 768px){
+ .hero{padding:20px;height:85vh}
+ .hero h1{font-size:28px}
+ .description{font-size:14px}
+
+ .episode-row{
+   grid-template-columns:30px 110px 1fr;
+ }
+ .episode-duration{display:none}
+ .episode-thumb img{width:110px;height:70px}
+
+ .cast-grid{grid-template-columns:1fr}
+
+ .profile-list{flex-direction:column}
+}
+
 </style>
 </head>
 
@@ -129,7 +149,7 @@ footer{padding:30px;text-align:center;background:#000;margin-top:60px}
 
 <!-- HERO -->
 <section class="hero">
- <video autoplay muted loop>
+ <video autoplay muted loop playsinline>
   <source src="video-cover.mp4" type="video/mp4">
  </video>
 
@@ -177,9 +197,9 @@ Sekarang, persahabatan mereka diuji cinta, tawa, dan keberanian untuk jujur—da
 
 <div class="episode-list">
 
-<div class="episode-row" onclick="openPopup('episode1.jpg','Episode 1: Teman Sejak SMA',episodeText[0])">
+<div class="episode-row" onclick="openPopup('episode1.JPG','Episode 1: Teman Sejak SMA',episodeText[0])">
  <div class="episode-num">1</div>
- <div class="episode-thumb"><img src="episode1.jpg"></div>
+ <div class="episode-thumb"><img src="episode1.JPG"></div>
  <div class="episode-info">
   <strong>Teman Sejak SMA</strong>
   <p>Pia & Ghozi kenal sejak 2010, teman sekelas yang langsung klik.</p>
@@ -187,9 +207,9 @@ Sekarang, persahabatan mereka diuji cinta, tawa, dan keberanian untuk jujur—da
  <div class="episode-duration">24m</div>
 </div>
 
-<div class="episode-row" onclick="openPopup('episode2.jpg','Episode 2: Ghozi Mulai Jatuh Hati',episodeText[1])">
+<div class="episode-row" onclick="openPopup('episode2.JPG','Episode 2: Ghozi Mulai Jatuh Hati',episodeText[1])">
  <div class="episode-num">2</div>
- <div class="episode-thumb"><img src="episode2.jpg"></div>
+ <div class="episode-thumb"><img src="episode2.JPG"></div>
  <div class="episode-info">
   <strong>Ghozi Mulai Jatuh Hati</strong>
   <p>Ghozi sadar Pia lebih dari sahabat, tapi denial.</p>
@@ -197,9 +217,9 @@ Sekarang, persahabatan mereka diuji cinta, tawa, dan keberanian untuk jujur—da
  <div class="episode-duration">24m</div>
 </div>
 
-<div class="episode-row" onclick="openPopup('episode3.jpg','Episode 3: Pernyataan yang Ditunda',episodeText[2])">
+<div class="episode-row" onclick="openPopup('episode3.JPG','Episode 3: Pernyataan yang Ditunda',episodeText[2])">
  <div class="episode-num">3</div>
- <div class="episode-thumb"><img src="episode3.jpg"></div>
+ <div class="episode-thumb"><img src="episode3.JPG"></div>
  <div class="episode-info">
   <strong>Pernyataan yang Ditunda</strong>
   <p>Ucapan Pia bikin Ghozi takut kehilangan.</p>
@@ -207,9 +227,9 @@ Sekarang, persahabatan mereka diuji cinta, tawa, dan keberanian untuk jujur—da
  <div class="episode-duration">24m</div>
 </div>
 
-<div class="episode-row" onclick="openPopup('episode4.jpg','Episode 4: Sahabat Jadi Sah',episodeText[3])">
+<div class="episode-row" onclick="openPopup('episode4.JPG','Episode 4: Sahabat Jadi Sah',episodeText[3])">
  <div class="episode-num">4</div>
- <div class="episode-thumb"><img src="episode4.jpg"></div>
+ <div class="episode-thumb"><img src="episode4.JPG"></div>
  <div class="episode-info">
   <strong>Sahabat Jadi Sah</strong>
   <p>Yang tadinya teman cerita kini menjadi teman hidup.</p>
