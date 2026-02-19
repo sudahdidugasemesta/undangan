@@ -10,7 +10,14 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
 body{background:#0b0b0b;color:#fff;overflow-x:hidden}
-
+  
+/* Loader */
+.loader{position:fixed;inset:0;background:#000;z-index:11000;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#e50914;font-size:28px;letter-spacing:3px}
+.loader span{margin-top:15px;font-size:14px;opacity:.8;color:#fff}
+.loader.hidden{display:none}
+.spinner{width:40px;height:40px;border:4px solid #333;border-top:4px solid #e50914;border-radius:50%;animation:spin 1s linear infinite;margin-top:20px}
+@keyframes spin{to{transform:rotate(360deg)}}
+  
 /* Opening */
 #openingPage{
 height:100vh;
@@ -90,20 +97,8 @@ z-index:99;
 }
 
 /* Sound button */
-.sound-btn{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#222;
-width:45px;
-height:45px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-z-index:99;
-}
+.music-control{position:fixed;bottom:20px;right:20px;background:#2a2a2a;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.85;z-index:20}
+.music-control svg{width:20px;height:20px;fill:#ccc}
 
 /* Section */
 .section{
@@ -126,24 +121,19 @@ width:100%;
 border-radius:8px;
 }
 
-/* Episodes */
-.episode{
-margin-bottom:30px;
-cursor:pointer;
-}
-.episode img{
-width:100%;
-border-radius:8px;
-margin-bottom:10px;
-}
-.episode h3{
-font-size:16px;
-margin-bottom:5px;
-}
-.episode p{
-font-size:14px;
-opacity:.8;
-}
+/* Episodes Netflix style */
+.episode-list{display:flex;flex-direction:column;gap:22px}
+.episode-row{display:flex;gap:15px;background:#111;padding:12px;border-radius:8px;cursor:pointer;transition:.2s}
+.episode-row:hover{background:#1c1c1c}
+
+.episode-num{font-size:20px;width:24px;opacity:.6;margin-top:6px}
+
+.episode-thumb img{width:150px;height:85px;object-fit:cover;border-radius:6px}
+
+.episode-info{flex:1}
+.episode-info strong{display:block;margin-bottom:6px;font-size:16px}
+.episode-info p{opacity:.75;font-size:14px;line-height:1.35}
+.readmore{margin-top:6px;font-size:12px;opacity:.55}
 
 /* Modal */
 .modal{
@@ -214,7 +204,7 @@ cursor:pointer;
 <source src="video-cover.mp4" type="video/mp4">
 </video>
 <div class="hero-content">
-<h1>SUDAH DIDUGA SEMESTA</h1>
+<h1>Ghozi & Silvia</h1>
 <div class="genre">Romance, Comedy</div>
 <div class="badges">100% Match • Semua Umur</div>
 
@@ -450,6 +440,7 @@ Keluarga Silvia
 
 </body>
 </html>
+
 
 
 
