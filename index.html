@@ -10,15 +10,34 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
 body{background:#0b0b0b;color:#fff;overflow-x:hidden}
-  
-/* Loader */
-.loader{position:fixed;inset:0;background:#000;z-index:11000;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#e50914;font-size:28px;letter-spacing:3px}
-.loader span{margin-top:15px;font-size:14px;opacity:.8;color:#fff}
-.loader.hidden{display:none}
-.spinner{width:40px;height:40px;border:4px solid #333;border-top:4px solid #e50914;border-radius:50%;animation:spin 1s linear infinite;margin-top:20px}
-@keyframes spin{to{transform:rotate(360deg)}}
-  
-/* Opening */
+
+/* ================= LOADER ================= */
+.loader{
+position:fixed;
+inset:0;
+background:#000;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:9999;
+color:#e50914;
+font-size:42px;
+letter-spacing:4px;
+animation:fadeIn 1.5s ease;
+}
+.loader span{
+color:#fff;
+font-size:14px;
+margin-top:15px;
+opacity:.6;
+}
+@keyframes fadeIn{
+0%{opacity:0;transform:scale(1.2)}
+100%{opacity:1;transform:scale(1)}
+}
+
+/* ================= OPENING ================= */
 #openingPage{
 height:100vh;
 display:flex;
@@ -28,163 +47,232 @@ align-items:center;
 background:#000;
 text-align:center;
 }
+
 .profile-row{
 display:flex;
 gap:40px;
-margin:30px 0;
+margin:40px 0;
 }
+
 .profile{
 text-align:center;
 }
+
 .profile img{
-width:100px;
-border-radius:12px;
+width:110px;
+border-radius:14px;
 }
+
 .open-btn{
-padding:10px 30px;
-border:1px solid #999;
+padding:12px 35px;
+border:1px solid #666;
 background:none;
-color:white;
+color:#fff;
 cursor:pointer;
 }
 
-/* Hero */
-.hero{
-position:relative;
-}
+/* ================= HERO ================= */
 .hero video{
 width:100%;
-max-height:60vh;
+max-height:55vh;
 object-fit:cover;
 }
+
 .hero-content{
 padding:25px;
 }
-.hero h1{
-font-size:28px;
-font-weight:600;
-margin-bottom:10px;
-}
-.genre{
-opacity:.8;
-margin-bottom:5px;
-}
-.badges{
-opacity:.7;
-font-size:14px;
-margin-bottom:20px;
-}
-.description{
-line-height:1.5;
-font-size:15px;
-margin-bottom:10px;
-}
+
+.hero h1{font-size:24px;margin-bottom:6px}
+.genre{opacity:.8;margin-bottom:4px}
+.badges{opacity:.6;font-size:13px;margin-bottom:15px}
+.description{font-size:14px;line-height:1.6;margin-bottom:10px}
 .hashtag{
-font-family:'Playfair Display', serif;
-opacity:.7;
+font-family:'Playfair Display',serif;
+font-size:15px;
+opacity:.6;
 }
 
-/* Floating guest name */
+/* Guest badge */
 .guest-name{
 position:fixed;
-top:15px;
-right:15px;
+top:8px;
+right:8px;
 background:rgba(0,0,0,.6);
-padding:8px 14px;
-border-radius:20px;
-font-size:13px;
-z-index:99;
+padding:6px 12px;
+border-radius:18px;
+font-size:12px;
+z-index:1000;
 }
 
-/* Music button */
-.music-control{position:fixed;bottom:20px;right:20px;background:#2a2a2a;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.85;z-index:20}
-.music-control svg{width:20px;height:20px;fill:#ccc}
+/* Music */
+.music-control{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#2a2a2a;
+border-radius:50%;
+width:42px;
+height:42px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+opacity:.85;
+z-index:1000;
+}
+.music-control svg{width:18px;height:18px;fill:#aaa}
 
 /* Section */
 .section{
-padding:40px 20px;
+padding:50px 20px;
 max-width:900px;
 margin:auto;
 }
-.section h2{
-margin-bottom:20px;
-}
+.section h2{margin-bottom:25px}
 
-/* Cast */
-.cast-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-}
-.cast-card img{
-width:100%;
-border-radius:8px;
-}
-
-/* Episodes */
-.episode-list{display:flex;flex-direction:column;gap:22px}
-.episode-row{background:#111;padding:14px;border-radius:8px;cursor:pointer;transition:.2s}
-.episode-row:hover{background:#1c1c1c}
-
-.episode-thumb img{width:100%;max-width:360px;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:6px}
-
-.episode-info{margin-top:10px}
-.episode-info strong{display:block;margin-bottom:6px;font-size:16px}
-.episode-info p{opacity:.75;font-size:14px;line-height:1.35}
-.readmore{margin-top:6px;font-size:12px;opacity:.55}
-
-/* Popup */
-.popup{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:999}
-.popup-content{background:#111;max-width:700px;width:92%;border-radius:10px;overflow:hidden;position:relative}
-.popup-content img{width:100%;max-height:300px;object-fit:cover}
-.popup-content div{padding:20px}
-.popup-content p{line-height:1.6;opacity:.9}
-.popup-close{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
-
-.countdown{font-size:26px;margin-top:10px}
-
-footer{padding:30px;text-align:center;background:#000;margin-top:60px}
-
-@media (max-width:768px){
- .hero-video{height:45vh}
- .hero-info h1{font-size:22px}
- .description{font-size:14px}
-
-/* Forms */
-form{
+/* CAST */
+.cast-vertical{
 display:flex;
 flex-direction:column;
-gap:10px;
+gap:60px;
+align-items:center;
+text-align:center;
 }
+.cast-vertical img{
+width:240px;
+border-radius:12px;
+margin-bottom:15px;
+}
+.cast-vertical h3{font-size:20px;margin-bottom:8px}
+.cast-desc{font-size:13px;opacity:.7;line-height:1.6}
+
+/* EPISODES */
+.episode-list{display:flex;flex-direction:column;gap:20px}
+
+.episode-row{
+display:flex;
+gap:16px;
+align-items:flex-start;
+padding:14px 0;
+border-bottom:1px solid #222;
+cursor:pointer;
+}
+
+.episode-thumb img{
+width:140px;
+height:80px;
+object-fit:cover;
+border-radius:6px;
+}
+
+.episode-info strong{
+font-size:15px;
+display:block;
+}
+
+.episode-info p{
+font-size:13px;
+opacity:.7;
+margin-top:6px;
+line-height:1.5;
+}
+
+.readmore{
+font-size:12px;
+opacity:.4;
+margin-top:6px;
+}
+
+/* POPUP */
+.popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.9);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:2000;
+}
+.popup-content{
+background:#111;
+width:92%;
+max-width:650px;
+border-radius:12px;
+overflow:hidden;
+position:relative;
+}
+.popup-content img{
+width:100%;
+height:250px;
+object-fit:cover;
+}
+.popup-body{padding:20px}
+.popup-close{
+position:absolute;
+top:12px;
+right:12px;
+background:rgba(0,0,0,.6);
+width:35px;
+height:35px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
+
+/* COUNTDOWN */
+.countdown{font-size:20px;margin-top:10px}
+
+/* RSVP */
+form{display:flex;flex-direction:column;gap:10px}
 input,select,textarea{
 padding:10px;
-border-radius:5px;
+border-radius:6px;
 border:none;
 }
 button{
-padding:10px;
-border:none;
+padding:12px;
 background:#e50914;
-color:white;
+color:#fff;
+border:none;
 cursor:pointer;
+}
+.comment-list{
+margin-top:20px;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+.comment-item{
+background:#111;
+padding:15px;
+border-radius:8px;
+font-size:13px;
+}
+
+/* FOOTER */
+footer{
+margin-top:80px;
+padding:60px 20px;
+text-align:center;
+border-top:1px solid #222;
+font-size:14px;
+opacity:.7;
 }
 </style>
 </head>
 
 <body>
 
-<div id="openingPage">
-<h1 style="color:red;">NIKAHFIX</h1>
-<div class="profile-row">
-<div class="profile">
-<img src="guest-avatar.png">
-<p id="guest1">Tamu 1</p>
+<div class="loader" id="loader">
+NIKAHFIX
+<span>Loading Love Story...</span>
 </div>
-<div class="profile">
-<img src="guest-avatar2.png">
-<p id="guest2">Tamu 2</p>
-</div>
-</div>
+
+<div id="openingPage" style="display:none;">
+<h1 style="color:#e50914;">NIKAHFIX</h1>
+<div class="profile-row" id="profileRow"></div>
 <button class="open-btn" onclick="startInvitation()">OPEN INVITATION</button>
 </div>
 
@@ -197,144 +285,170 @@ cursor:pointer;
 <source src="video-cover.mp4" type="video/mp4">
 </video>
 <div class="hero-content">
-<h1>Ghozi & Silvia</h1>
+<h1>SUDAH DIDUGA SEMESTA</h1>
 <div class="genre">Romance, Comedy</div>
 <div class="badges">100% Match • Semua Umur</div>
-
 <div class="description">
 Pia dan Ghozi sudah bersahabat sejak 2010.
 Ghozi jatuh hati duluan, tapi denial membuatnya menjauh…
 Sekarang persahabatan mereka diuji cinta dan akhirnya nikah.
 </div>
-
 <div class="hashtag">#SudahDidugaSemesta</div>
 </div>
 </div>
 
-<!-- Cast -->
+<!-- CAST -->
 <section class="section">
 <h2>Cast</h2>
-<div class="cast-grid">
-<div class="cast-card">
+<div class="cast-vertical">
+<div>
 <img src="foto-ghozi.jpg">
-<p>Ghozi</p>
+<h3>Ghozi Izzuddin</h3>
+<div class="cast-desc">Putra kedua dari Alm. Imron Rosidi & Alm. Nurul Hidayati.</div>
 </div>
-<div class="cast-card">
+<div>
 <img src="foto-silvia.jpg">
-<p>Silvia</p>
+<h3>Silvia Yuliani</h3>
+<div class="cast-desc">Putri kedua dari Sunaryo & Endang Puji Astuti.</div>
 </div>
 </div>
 </section>
 
-<!-- Wedding Schedule -->
+<!-- EPISODES -->
+<section class="section">
+<h2>Episodes</h2>
+<div class="episode-list">
+<div class="episode-row" onclick="openPopup('episode1.JPG','1. Teman Sejak SMA',episodeText[0])">
+<div class="episode-thumb"><img src="episode1.JPG"></div>
+<div class="episode-info">
+<strong>1. Teman Sejak SMA</strong>
+<p>Pia & Ghozi kenal sejak 2010, teman sekelas yang langsung klik.</p>
+<div class="readmore">Tap to read more</div>
+</div>
+</div>
+
+<div class="episode-row" onclick="openPopup('episode2.JPG','2. Ghozi Mulai Jatuh Hati',episodeText[1])">
+<div class="episode-thumb"><img src="episode2.JPG"></div>
+<div class="episode-info">
+<strong>2. Ghozi Mulai Jatuh Hati</strong>
+<p>Ghozi sadar Pia lebih dari sahabat, tapi denial.</p>
+<div class="readmore">Tap to read more</div>
+</div>
+</div>
+
+<div class="episode-row" onclick="openPopup('episode3.JPG','3. Pernyataan yang Ditunda',episodeText[2])">
+<div class="episode-thumb"><img src="episode3.JPG"></div>
+<div class="episode-info">
+<strong>3. Pernyataan yang Ditunda</strong>
+<p>Ucapan Pia bikin Ghozi sadar perasaannya.</p>
+<div class="readmore">Tap to read more</div>
+</div>
+</div>
+
+<div class="episode-row" onclick="openPopup('episode4.JPG','4. Sahabat Jadi Sah',episodeText[3])">
+<div class="episode-thumb"><img src="episode4.JPG"></div>
+<div class="episode-info">
+<strong>4. Sahabat Jadi Sah</strong>
+<p>Yang dulu teman cerita kini menjadi teman hidup.</p>
+<div class="readmore">Tap to read more</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SCHEDULE -->
 <section class="section">
 <h2>Wedding Schedule</h2>
 <p>Akad: 5 April 2026 — 08:00 WIB</p>
 <p>Resepsi: 5 April 2026 — 11:00 WIB</p>
-<div id="countdown"></div>
+<div class="countdown" id="countdown"></div>
 </section>
 
-<!-- Location -->
+<!-- MAP -->
 <section class="section">
-<h2>Wedding Location</h2>
-<p>Gedung Serbaguna Mahkamah Konstitusi<br>Jakarta Pusat</p>
-
-<a href="https://maps.app.goo.gl/2df2YUDNRbXWK5W27" target="_blank">
-Open in Google Maps
-</a>
-
-<iframe width="100%" height="300"
-style="border-radius:10px;border:0;margin-top:15px;"
-loading="lazy"
-allowfullscreen
-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0488499231474!2d106.99263057573181!3d-6.257295561264426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698dd31d838819%3A0xea574504f70a30a5!2sGedung%20Serbaguna%20Mahkamah%20Konstitusi!5e0!3m2!1sid!2sid!4v1771476134160!5m2!1sid!2sid">
-</iframe>
+<h2>Location</h2>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0488499231474!2d106.99263057573181!3d-6.257295561264426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698dd31d838819%3A0xea574504f70a30a5!2sGedung%20Serbaguna%20Mahkamah%20Konstitusi!5e0!3m2!1sid!2sid!4v1771476134160!5m2!1sid!2sid" width="100%" height="300" style="border:0;" loading="lazy"></iframe>
 </section>
-  
-<!-- Episodes -->
-<section class="section" id="episodes">
-<h2>Episodes</h2>
-<div class="episode-list">
 
-<div class="episode-row" onclick="openPopup('episode1.JPG','Episode 1',episodeText[0])">
- <div class="episode-thumb"><img src="episode1.JPG"></div>
- <div class="episode-info">
-  <strong>1. Teman Sejak SMA</strong>
-  <p>Pia & Ghozi kenal sejak 2010, teman sekelas yang langsung klik.</p>
-  <div class="readmore">Tap to read more</div>
- </div>
-</div>
-
-<div class="episode-row" onclick="openPopup('episode2.JPG','Episode 2',episodeText[1])">
- <div class="episode-thumb"><img src="episode2.JPG"></div>
- <div class="episode-info">
-  <strong>2. Ghozi Mulai Jatuh Hati</strong>
-  <p>Ghozi sadar Pia lebih dari sahabat, tapi denial.</p>
-  <div class="readmore">Tap to read more</div>
- </div>
-</div>
-
-<div class="episode-row" onclick="openPopup('episode3.JPG','Episode 3',episodeText[2])">
- <div class="episode-thumb"><img src="episode3.JPG"></div>
- <div class="episode-info">
-  <strong>3. Pernyataan yang Ditunda</strong>
-  <p>Ucapan Pia bikin Ghozi takut kehilangan.</p>
-  <div class="readmore">Tap to read more</div>
- </div>
-</div>
-
-<div class="episode-row" onclick="openPopup('episode4.JPG','Episode 4',episodeText[3])">
- <div class="episode-thumb"><img src="episode4.JPG"></div>
- <div class="episode-info">
-  <strong>4. Sahabat Jadi Sah</strong>
-  <p>Yang tadinya teman cerita kini menjadi teman hidup.</p>
-  <div class="readmore">Tap to read more</div>
- </div>
-  
-</div>
-</section>
-  
-<!-- Tanda Kasih -->
+<!-- TANDA KASIH -->
 <section class="section">
 <h2>Tanda Kasih</h2>
 <p>BCA - 12345678 a.n Ghozi</p>
 <p>BTN - 12345678 a.n Silvia</p>
 </section>
 
-<!-- Ucapan -->
+<!-- RSVP -->
 <section class="section">
 <h2>Ucapan & Kehadiran</h2>
-<form id="wishForm">
-<input id="guestName" placeholder="Nama Anda" required>
-<select id="attendance">
+<form id="rsvpForm">
+<input type="text" id="nama" placeholder="Nama Anda" required>
+<select id="status">
 <option>Hadir</option>
 <option>Tidak Hadir</option>
 </select>
-<textarea id="message" placeholder="Ucapan..." required></textarea>
-<button>Kirim</button>
+<textarea id="ucapan" placeholder="Ucapan..." required></textarea>
+<button type="submit">Kirim</button>
 </form>
-<div id="wishList"></div>
+<div class="comment-list" id="commentList"></div>
 </section>
 
+<footer>
+Terima kasih atas doa dan kehadiran Anda.
+</footer>
+
 </div>
 
-<!-- EpisodePopup -->
-<div class="popup" id="popup" onclick="closePopup()">
- <div class="popup-content" onclick="event.stopPropagation()">
-  <div class="popup-close" onclick="closePopup()">✕</div>
-  <img id="popupImg">
-  <div>
-   <h3 id="popupTitle"></h3>
-   <p id="popupDesc"></p>
-  </div>
- </div>
+<!-- POPUP -->
+<div class="popup" id="popup">
+<div class="popup-content">
+<div class="popup-close" onclick="closePopup()">✕</div>
+<img id="popupImg">
+<div class="popup-body">
+<h3 id="popupTitle"></h3>
+<p id="popupDesc"></p>
+</div>
+</div>
 </div>
 
-<div class="sound-btn" onclick="toggleSound()">🔊</div>
+<div class="music-control" onclick="toggleSound()">
+<svg viewBox="0 0 24 24">
+<path d="M3 9v6h4l5 5V4L7 9H3z"/>
+</svg>
+</div>
 
 <audio id="bgMusic" src="music.mp3" loop></audio>
 
 <script>
+/* Loader */
+window.addEventListener("load",()=>{
+setTimeout(()=>{
+document.getElementById("loader").style.display="none";
+document.getElementById("openingPage").style.display="flex";
+},1500);
+});
+
+/* Guest Parsing */
+const params = new URLSearchParams(window.location.search);
+let guest = params.get("to") || "Tamu";
+let names = guest.split("-");
+let profileRow = document.getElementById("profileRow");
+
+names.forEach(n=>{
+profileRow.innerHTML += `
+<div class="profile">
+<img src="guest-avatar.png">
+<p>${n.replace(/\+/g,' ')}</p>
+</div>`;
+});
+
+if(names.length === 1){
+profileRow.style.justifyContent = "center";
+}
+
+document.getElementById("guestDisplay").innerText =
+names.map(n=>n.replace(/\+/g,' ')).join(" & ");
+
+/* Start */
 function startInvitation(){
 document.getElementById("openingPage").style.display="none";
 document.getElementById("mainContent").style.display="block";
@@ -342,15 +456,35 @@ document.getElementById("heroVideo").play().catch(()=>{});
 document.getElementById("bgMusic").play().catch(()=>{});
 }
 
+/* Music */
 function toggleSound(){
-const music = document.getElementById("bgMusic");
-music.muted = !music.muted;
+const music=document.getElementById("bgMusic");
+music.muted=!music.muted;
 }
 
-const target = new Date("April 5, 2026 08:00:00").getTime();
+/* Episodes */
+const episodeText=[
+"Detail lengkap Episode 1...",
+"Detail lengkap Episode 2...",
+"Detail lengkap Episode 3...",
+"Detail lengkap Episode 4..."
+];
+
+function openPopup(img,title,text){
+document.getElementById("popupImg").src=img;
+document.getElementById("popupTitle").innerText=title;
+document.getElementById("popupDesc").innerText=text;
+document.getElementById("popup").style.display="flex";
+}
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+/* Countdown */
+const target = new Date("Apr 5, 2026 08:00:00").getTime();
 setInterval(()=>{
-let now = new Date().getTime();
-let gap = target-now;
+let now=new Date().getTime();
+let gap=target-now;
 let d=Math.floor(gap/(1000*60*60*24));
 let h=Math.floor((gap%(1000*60*60*24))/(1000*60*60));
 let m=Math.floor((gap%(1000*60*60))/(1000*60));
@@ -358,103 +492,36 @@ document.getElementById("countdown").innerText =
 d+" days "+h+" hours "+m+" minutes";
 },1000);
 
-document.getElementById("wishForm").addEventListener("submit",function(e){
-e.preventDefault();
-const name=document.getElementById("guestName").value;
-const attendance=document.getElementById("attendance").value;
-const message=document.getElementById("message").value;
+/* RSVP Local Storage */
+const form=document.getElementById("rsvpForm");
+const commentList=document.getElementById("commentList");
 
-const newWish=document.createElement("div");
-newWish.innerHTML="<b>"+name+"</b> ("+attendance+")<br>"+message+"<hr>";
-document.getElementById("wishList").prepend(newWish);
-this.reset();
+function loadComments(){
+let data=JSON.parse(localStorage.getItem("comments")||"[]");
+commentList.innerHTML="";
+data.forEach(c=>{
+commentList.innerHTML+=`
+<div class="comment-item">
+<strong>${c.nama}</strong> (${c.status})<br>
+${c.ucapan}
+</div>`;
+});
+}
+
+form.addEventListener("submit",e=>{
+e.preventDefault();
+let nama=document.getElementById("nama").value;
+let status=document.getElementById("status").value;
+let ucapan=document.getElementById("ucapan").value;
+let data=JSON.parse(localStorage.getItem("comments")||"[]");
+data.push({nama,status,ucapan});
+localStorage.setItem("comments",JSON.stringify(data));
+form.reset();
+loadComments();
 });
 
-function getGuestFromURL() {
-  const params = new URLSearchParams(window.location.search);
-  let guest = params.get("to");
-
-  if (!guest) return;
-
-  guest = decodeURIComponent(guest);
-  const names = guest.split("-").map(n => n.trim());
-
-  const guest1 = document.getElementById("guest1");
-  const guest2 = document.getElementById("guest2");
-  const profile2 = guest2.parentElement;
-
-  // Set nama pertama
-  guest1.innerText = names[0] || "";
-
-  // Jika ada nama kedua → tampilkan
-  if (names.length > 1 && names[1] !== "") {
-    guest2.innerText = names[1];
-    profile2.style.display = "block";
-  } else {
-    // Jika hanya satu nama → sembunyikan profile kedua
-    profile2.style.display = "none";
-  }
-
-  // Floating display kanan atas
-  document.getElementById("guestDisplay").innerText =
-    names.length > 1
-      ? names[0] + " & " + names[1]
-      : names[0];
-}
-
-getGuestFromURL();
-
-function openEpisode(num){
-  const stories = {
-    1: `Pia & Ghozi kenal sejak 2010 sebagai teman sekelas yang langsung klik.
-Walau berbeda kampus, komunikasi tidak pernah putus.`,
-    2: `Seiring waktu Ghozi sadar perasaannya berubah.
-Namun ia sempat denial karena takut merusak persahabatan.`,
-    3: `Ucapan Pia membuat Ghozi sadar waktu tidak selalu menunggu.
-Ia akhirnya mengungkapkan perasaan.`,
-    4: `Dua sahabat akhirnya berdiri di pelaminan yang sama.
-Yang dulu teman cerita kini menjadi teman hidup.`
-  };
-
-  document.getElementById("modalContent").innerText = stories[num];
-  document.getElementById("episodeModal").style.display="block";
-}
-
-function closeModal(){
-  document.getElementById("episodeModal").style.display="none";
-}
-
+loadComments();
 </script>
-
-<!-- PENUTUP -->
-<section class="section" style="text-align:center; padding-top:60px; padding-bottom:80px; border-top:1px solid #222;">
-
-<p style="max-width:600px; margin:auto; line-height:1.6; opacity:.85;">
-Merupakan suatu kehormatan dan kebahagiaan bagi kami
-apabila Bapak/Ibu/Saudara/i berkenan hadir untuk
-memberikan doa restu kepada kami.
-</p>
-
-<p style="margin-top:30px; color:#e88aa2; font-weight:600;">
-Salam Hormat Kedua Mempelai
-</p>
-
-<p style="margin-top:20px; font-size:14px; opacity:.8;">
-Kami yang berbahagia
-</p>
-
-<div style="margin-top:15px; font-size:14px; opacity:.7;">
-Keluarga Ghozi<br>
-Keluarga Silvia
-</div>
-
-</section>
 
 </body>
 </html>
-
-
-
-
-
-
