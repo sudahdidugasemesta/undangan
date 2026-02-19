@@ -96,7 +96,7 @@ font-size:13px;
 z-index:99;
 }
 
-/* Sound button */
+/* Music button */
 .music-control{position:fixed;bottom:20px;right:20px;background:#2a2a2a;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.85;z-index:20}
 .music-control svg{width:20px;height:20px;fill:#ccc}
 
@@ -121,41 +121,34 @@ width:100%;
 border-radius:8px;
 }
 
-/* Episodes Netflix style */
+/* Episodes */
 .episode-list{display:flex;flex-direction:column;gap:22px}
-.episode-row{display:flex;gap:15px;background:#111;padding:12px;border-radius:8px;cursor:pointer;transition:.2s}
+.episode-row{background:#111;padding:14px;border-radius:8px;cursor:pointer;transition:.2s}
 .episode-row:hover{background:#1c1c1c}
 
-.episode-num{font-size:20px;width:24px;opacity:.6;margin-top:6px}
+.episode-thumb img{width:100%;max-width:360px;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:6px}
 
-.episode-thumb img{width:150px;height:85px;object-fit:cover;border-radius:6px}
-
-.episode-info{flex:1}
+.episode-info{margin-top:10px}
 .episode-info strong{display:block;margin-bottom:6px;font-size:16px}
 .episode-info p{opacity:.75;font-size:14px;line-height:1.35}
 .readmore{margin-top:6px;font-size:12px;opacity:.55}
 
-/* Modal */
-.modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.9);
-display:none;
-padding:30px;
-overflow:auto;
-z-index:999;
-}
-.modal-content{
-max-width:600px;
-margin:auto;
-}
-.close{
-position:absolute;
-top:20px;
-right:25px;
-font-size:24px;
-cursor:pointer;
-}
+/* Popup */
+.popup{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:999}
+.popup-content{background:#111;max-width:700px;width:92%;border-radius:10px;overflow:hidden;position:relative}
+.popup-content img{width:100%;max-height:300px;object-fit:cover}
+.popup-content div{padding:20px}
+.popup-content p{line-height:1.6;opacity:.9}
+.popup-close{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
+
+.countdown{font-size:26px;margin-top:10px}
+
+footer{padding:30px;text-align:center;background:#000;margin-top:60px}
+
+@media (max-width:768px){
+ .hero-video{height:45vh}
+ .hero-info h1{font-size:22px}
+ .description{font-size:14px}
 
 /* Forms */
 form{
@@ -259,33 +252,46 @@ src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0488499231474!2d
 </section>
   
 <!-- Episodes -->
-<section class="section">
+<section class="section" id="episodes">
 <h2>Episodes</h2>
+<div class="episode-list">
 
-<div class="episode" onclick="openEpisode(1)">
-<img src="episode1.JPG">
-<h3>1. Teman Sejak SMA</h3>
-<p>Pia & Ghozi kenal sejak 2010, teman sekelas yang langsung klik.</p>
+<div class="episode-row" onclick="openPopup('episode1.JPG','Episode 1',episodeText[0])">
+ <div class="episode-thumb"><img src="episode1.JPG"></div>
+ <div class="episode-info">
+  <strong>1. Teman Sejak SMA</strong>
+  <p>Pia & Ghozi kenal sejak 2010, teman sekelas yang langsung klik.</p>
+  <div class="readmore">Tap to read more</div>
+ </div>
 </div>
 
-<div class="episode" onclick="openEpisode(2)">
-<img src="episode2.JPG">
-<h3>2. Ghozi Mulai Jatuh Hati</h3>
-<p>Ghozi sadar Pia lebih dari sahabat, tapi denial.</p>
+<div class="episode-row" onclick="openPopup('episode2.JPG','Episode 2',episodeText[1])">
+ <div class="episode-thumb"><img src="episode2.JPG"></div>
+ <div class="episode-info">
+  <strong>2. Ghozi Mulai Jatuh Hati</strong>
+  <p>Ghozi sadar Pia lebih dari sahabat, tapi denial.</p>
+  <div class="readmore">Tap to read more</div>
+ </div>
 </div>
 
-<div class="episode" onclick="openEpisode(3)">
-<img src="episode3.JPG">
-<h3>3. Pernyataan yang Ditunda</h3>
-<p>Ucapan Pia bikin Ghozi takut kehilangan.</p>
+<div class="episode-row" onclick="openPopup('episode3.JPG','Episode 3',episodeText[2])">
+ <div class="episode-thumb"><img src="episode3.JPG"></div>
+ <div class="episode-info">
+  <strong>3. Pernyataan yang Ditunda</strong>
+  <p>Ucapan Pia bikin Ghozi takut kehilangan.</p>
+  <div class="readmore">Tap to read more</div>
+ </div>
 </div>
 
-<div class="episode" onclick="openEpisode(4)">
-<img src="episode4.JPG">
-<h3>4. Sahabat Jadi Sah</h3>
-<p>Yang tadinya teman cerita kini menjadi teman hidup.</p>
-</div>
+<div class="episode-row" onclick="openPopup('episode4.JPG','Episode 4',episodeText[3])">
+ <div class="episode-thumb"><img src="episode4.JPG"></div>
+ <div class="episode-info">
+  <strong>4. Sahabat Jadi Sah</strong>
+  <p>Yang tadinya teman cerita kini menjadi teman hidup.</p>
+  <div class="readmore">Tap to read more</div>
+ </div>
   
+</div>
 </section>
   
 <!-- Tanda Kasih -->
@@ -312,10 +318,16 @@ src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0488499231474!2d
 
 </div>
 
-<!-- Modal -->
-<div class="modal" id="episodeModal">
-<span class="close" onclick="closeModal()">✕</span>
-<div class="modal-content" id="modalContent"></div>
+<!-- EpisodePopup -->
+<div class="popup" id="popup" onclick="closePopup()">
+ <div class="popup-content" onclick="event.stopPropagation()">
+  <div class="popup-close" onclick="closePopup()">✕</div>
+  <img id="popupImg">
+  <div>
+   <h3 id="popupTitle"></h3>
+   <p id="popupDesc"></p>
+  </div>
+ </div>
 </div>
 
 <div class="sound-btn" onclick="toggleSound()">🔊</div>
@@ -440,6 +452,7 @@ Keluarga Silvia
 
 </body>
 </html>
+
 
 
 
