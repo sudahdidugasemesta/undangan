@@ -451,12 +451,18 @@ let guest = params.get("to") || "Tamu";
 let names = guest.split("-");
 let profileRow = document.getElementById("profileRow");
 
-names.forEach(n=>{
+profileRow.innerHTML = "";
+
+names.forEach((n, index) => {
+
+let avatar = index === 0 ? "guest-avatar.png" : "guest-avatar2.png";
+
 profileRow.innerHTML += `
 <div class="profile">
-<img src="guest-avatar.png">
+<img src="${avatar}">
 <p>${n.replace(/\+/g,' ')}</p>
 </div>`;
+
 });
 
 if(names.length === 1){
@@ -465,6 +471,7 @@ profileRow.style.justifyContent = "center";
 
 document.getElementById("guestDisplay").innerText =
 names.map(n=>n.replace(/\+/g,' ')).join(" & ");
+
 
 /* Start */
 function startInvitation(){
@@ -543,5 +550,6 @@ loadComments();
 
 </body>
 </html>
+
 
 
