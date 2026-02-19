@@ -267,7 +267,37 @@ allowfullscreen
 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0488499231474!2d106.99263057573181!3d-6.257295561264426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698dd31d838819%3A0xea574504f70a30a5!2sGedung%20Serbaguna%20Mahkamah%20Konstitusi!5e0!3m2!1sid!2sid!4v1771476134160!5m2!1sid!2sid">
 </iframe>
 </section>
+  
+<!-- Episodes -->
+<section class="section">
+<h2>Episodes</h2>
 
+<div class="episode" onclick="openEpisode(1)">
+<img src="episode1.JPG">
+<h3>1. Teman Sejak SMA</h3>
+<p>Pia & Ghozi kenal sejak 2010, teman sekelas yang langsung klik.</p>
+</div>
+
+<div class="episode" onclick="openEpisode(2)">
+<img src="episode2.JPG">
+<h3>2. Ghozi Mulai Jatuh Hati</h3>
+<p>Ghozi sadar Pia lebih dari sahabat, tapi denial.</p>
+</div>
+
+<div class="episode" onclick="openEpisode(3)">
+<img src="episode3.JPG">
+<h3>3. Pernyataan yang Ditunda</h3>
+<p>Ucapan Pia bikin Ghozi takut kehilangan.</p>
+</div>
+
+<div class="episode" onclick="openEpisode(4)">
+<img src="episode4.JPG">
+<h3>4. Sahabat Jadi Sah</h3>
+<p>Yang tadinya teman cerita kini menjadi teman hidup.</p>
+</div>
+  
+</section>
+  
 <!-- Tanda Kasih -->
 <section class="section">
 <h2>Tanda Kasih</h2>
@@ -372,6 +402,26 @@ function getGuestFromURL() {
 
 getGuestFromURL();
 
+function openEpisode(num){
+  const stories = {
+    1: `Pia & Ghozi kenal sejak 2010 sebagai teman sekelas yang langsung klik.
+Walau berbeda kampus, komunikasi tidak pernah putus.`,
+    2: `Seiring waktu Ghozi sadar perasaannya berubah.
+Namun ia sempat denial karena takut merusak persahabatan.`,
+    3: `Ucapan Pia membuat Ghozi sadar waktu tidak selalu menunggu.
+Ia akhirnya mengungkapkan perasaan.`,
+    4: `Dua sahabat akhirnya berdiri di pelaminan yang sama.
+Yang dulu teman cerita kini menjadi teman hidup.`
+  };
+
+  document.getElementById("modalContent").innerText = stories[num];
+  document.getElementById("episodeModal").style.display="block";
+}
+
+function closeModal(){
+  document.getElementById("episodeModal").style.display="none";
+}
+
 </script>
 
 <!-- PENUTUP -->
@@ -400,6 +450,7 @@ Keluarga Silvia
 
 </body>
 </html>
+
 
 
 
