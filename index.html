@@ -337,6 +337,28 @@ newWish.innerHTML="<b>"+name+"</b> ("+attendance+")<br>"+message+"<hr>";
 document.getElementById("wishList").prepend(newWish);
 this.reset();
 });
+
+function getGuestFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  let guest = params.get("to");
+
+  if (!guest) return;
+
+  guest = decodeURIComponent(guest);
+
+  // Split pakai strip
+  const names = guest.split("-").map(n => n.trim());
+
+  // Opening profiles
+  document.getElementById("guest1").innerText = names[0] || "";
+  document.getElementById("guest2").innerText = names[1] || "";
+
+  // Floating display kanan atas
+  document.getElementById("guestDisplay").innerText = guest.replace("-", " & ");
+}
+
+getGuestFromURL();
+
 </script>
 
 <!-- PENUTUP -->
@@ -365,4 +387,5 @@ Keluarga Silvia
 
 </body>
 </html>
+
 
