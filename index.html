@@ -345,16 +345,29 @@ function getGuestFromURL() {
   if (!guest) return;
 
   guest = decodeURIComponent(guest);
-
-  // Split pakai strip
   const names = guest.split("-").map(n => n.trim());
 
-  // Opening profiles
-  document.getElementById("guest1").innerText = names[0] || "";
-  document.getElementById("guest2").innerText = names[1] || "";
+  const guest1 = document.getElementById("guest1");
+  const guest2 = document.getElementById("guest2");
+  const profile2 = guest2.parentElement;
+
+  // Set nama pertama
+  guest1.innerText = names[0] || "";
+
+  // Jika ada nama kedua → tampilkan
+  if (names.length > 1 && names[1] !== "") {
+    guest2.innerText = names[1];
+    profile2.style.display = "block";
+  } else {
+    // Jika hanya satu nama → sembunyikan profile kedua
+    profile2.style.display = "none";
+  }
 
   // Floating display kanan atas
-  document.getElementById("guestDisplay").innerText = guest.replace("-", " & ");
+  document.getElementById("guestDisplay").innerText =
+    names.length > 1
+      ? names[0] + " & " + names[1]
+      : names[0];
 }
 
 getGuestFromURL();
@@ -387,5 +400,6 @@ Keluarga Silvia
 
 </body>
 </html>
+
 
 
