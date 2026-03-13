@@ -576,8 +576,13 @@ data.reverse().forEach(c=>{
 if(!c[1] || !c[3]) return;
 
 commentList.innerHTML+=`
+let badgeClass = c[2] === "Hadir" ? "hadir" : "tidak-hadir";
+
+commentList.innerHTML+=`
 <div class="comment-item fade-in">
-<strong>${c[1]}</strong> (${c[2]})<br>
+<strong>${c[1]}</strong>
+<span class="status-badge ${badgeClass}">${c[2]}</span>
+<br>
 ${c[3]}
 </div>
 `;
