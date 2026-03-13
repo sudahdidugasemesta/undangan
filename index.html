@@ -243,6 +243,10 @@ margin-top:20px;
 display:flex;
 flex-direction:column;
 gap:15px;
+
+max-height:350px;
+overflow-y:auto;
+padding-right:5px;
 }
 .comment-item{
 background:#111;
@@ -518,31 +522,56 @@ d+" days "+h+" hours "+m+" minutes";
 },1000);
 
 /* RSVP Local Storage */
+const API_URL = "https://script.google.com/macros/s/AKfycbxoj_MOQbrhAPB6tHviVg0_m7ji02dpyRbp_L-ATuo7JopGLhd5jViM0b0O0y4Vqxk/exec";
+
 const form=document.getElementById("rsvpForm");
 const commentList=document.getElementById("commentList");
 
 function loadComments(){
-let data=JSON.parse(localStorage.getItem("comments")||"[]");
+
+fetch(API_URL)
+.then(res=>res.json())
+.then(data=>{
+
 commentList.innerHTML="";
-data.forEach(c=>{
+
+data.reverse().forEach(c=>{
+
 commentList.innerHTML+=`
 <div class="comment-item">
-<strong>${c.nama}</strong> (${c.status})<br>
-${c.ucapan}
-</div>`;
+<strong>${c[1]}</strong> (${c[2]})<br>
+${c[3]}
+</div>
+`;
+
 });
+
+});
+
 }
 
 form.addEventListener("submit",e=>{
 e.preventDefault();
+
 let nama=document.getElementById("nama").value;
 let status=document.getElementById("status").value;
 let ucapan=document.getElementById("ucapan").value;
-let data=JSON.parse(localStorage.getItem("comments")||"[]");
-data.push({nama,status,ucapan});
-localStorage.setItem("comments",JSON.stringify(data));
+
+fetch(API_URL,{
+method:"POST",
+body:JSON.stringify({
+nama:nama,
+status:status,
+ucapan:ucapan
+})
+})
+.then(()=>{
+
 form.reset();
 loadComments();
+
+});
+
 });
 
 loadComments();
