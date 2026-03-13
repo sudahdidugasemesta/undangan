@@ -611,8 +611,6 @@ ucapan:ucapan
 
 form.reset();
 
-commentList.insertAdjacentHTML("afterbegin",`
-<div class="comment-item fade-in">
 let badgeClass = status === "Hadir" ? "hadir" : "tidak-hadir";
 
 commentList.insertAdjacentHTML("afterbegin",`
@@ -621,8 +619,6 @@ commentList.insertAdjacentHTML("afterbegin",`
 <span class="status-badge ${badgeClass}">${status}</span>
 <br>
 ${ucapan}
-</div>
-`);
 </div>
 `);
 
