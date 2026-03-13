@@ -606,9 +606,23 @@ ucapan:ucapan
 .then(()=>{
 
 form.reset();
-loadComments();
 
-});
+commentList.insertAdjacentHTML("afterbegin",`
+<div class="comment-item fade-in">
+let badgeClass = status === "Hadir" ? "hadir" : "tidak-hadir";
+
+commentList.insertAdjacentHTML("afterbegin",`
+<div class="comment-item fade-in">
+<strong>${nama}</strong>
+<span class="status-badge ${badgeClass}">${status}</span>
+<br>
+${ucapan}
+</div>
+`);
+</div>
+`);
+
+setTimeout(loadComments,500);
 
 });
 
