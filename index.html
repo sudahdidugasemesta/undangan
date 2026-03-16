@@ -298,10 +298,6 @@ text-shadow:
 0 0 12px rgba(255,0,0,0.6),
 0 0 20px rgba(255,0,0,0.4);
 }
-
-.flip-card{
-font-family:'Orbitron', sans-serif;
-}
   
 /* PREMIUM FLIP CLOCK */
 .countdown{
@@ -403,8 +399,13 @@ color:#888;
 /* SOFT RED GLOW */
 .flip-card{
 box-shadow:
-0 0 6px rgba(255,40,40,0.15),
-0 0 14px rgba(255,40,40,0.08);
+0 0 8px rgba(255,40,40,0.18),
+0 0 18px rgba(255,40,40,0.12);
+backdrop-filter: blur(4px);
+}
+
+.flip-card{
+font-family:'Orbitron', sans-serif;
 }
   
 /* LOCATION */
@@ -837,11 +838,14 @@ el.classList.add("flip");
 setTimeout(()=>{
 top.innerText=value;
 bottom.innerText=value;
+flipTop.innerText=value;
+flipBottom.innerText=value;
 el.classList.remove("flip");
-},1000);
+},500);
 }
 }
-setInterval(updateClock,1000);
+updateClock(); // jalankan sekali saat load
+setInterval(updateClock,60000); // update setiap 1 menit
 
 /* RSVP Local Storage */
 const API_URL = "https://script.google.com/macros/s/AKfycbxoj_MOQbrhAPB6tHviVg0_m7ji02dpyRbp_L-ATuo7JopGLhd5jViM0b0O0y4Vqxk/exec";
