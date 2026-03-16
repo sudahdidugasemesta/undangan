@@ -6,7 +6,8 @@
 <title>Ghozi & Silvia</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
 body{background:#0b0b0b;color:#fff;overflow-x:hidden}
@@ -297,24 +298,29 @@ text-shadow:
 0 0 12px rgba(255,0,0,0.6),
 0 0 20px rgba(255,0,0,0.4);
 }
+
+.flip-card{
+font-family:'Orbitron', sans-serif;
+}
   
-/* COUNTDOWN FLIP CLOCK */
+/* PREMIUM FLIP CLOCK */
 .countdown{
 display:flex;
 justify-content:center;
-gap:16px;
-margin-top:25px;
+gap:18px;
+margin-top:30px;
 }
 .flip-container{
 text-align:center;
 }
+/* BOX */
 .flip-card{
 position:relative;
-width:80px;
-height:80px;
-perspective:500px;
+width:85px;
+height:85px;
+perspective:600px;
 }
-/* bagian atas & bawah */
+/* TOP & BOTTOM */
 .flip-card .top,
 .flip-card .bottom{
 position:absolute;
@@ -322,29 +328,29 @@ left:0;
 width:100%;
 height:50%;
 overflow:hidden;
-background:#111;
-color:#ff2b2b;
 display:flex;
 justify-content:center;
-font-size:32px;
-font-weight:700;
+font-size:34px;
+font-weight:600;
+background:#0f0f0f;
+color:#ff3b3b;
 }
 /* TOP */
 .flip-card .top{
 top:0;
 align-items:flex-end;
-border-top-left-radius:8px;
-border-top-right-radius:8px;
-border-bottom:1px solid #222;
+border-top-left-radius:10px;
+border-top-right-radius:10px;
+border-bottom:1px solid #1e1e1e;
 }
 /* BOTTOM */
 .flip-card .bottom{
 bottom:0;
 align-items:flex-start;
-border-bottom-left-radius:8px;
-border-bottom-right-radius:8px;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
 }
-/* bagian animasi */
+/* FLIP PART */
 .flip-top,
 .flip-bottom{
 position:absolute;
@@ -352,14 +358,14 @@ left:0;
 width:100%;
 height:50%;
 overflow:hidden;
-background:#111;
-color:#ff2b2b;
 display:flex;
 justify-content:center;
-font-size:32px;
-font-weight:700;
+font-size:34px;
+font-weight:600;
+background:#0f0f0f;
+color:#ff3b3b;
 }
-/* animasi */
+/* ANIMATION PART */
 .flip-top{
 top:0;
 align-items:flex-end;
@@ -371,11 +377,12 @@ align-items:flex-start;
 transform-origin:top;
 transform:rotateX(90deg);
 }
+/* ANIMATION */
 .flip-card.flip .flip-top{
-animation:flipTop .4s ease forwards;
+animation:flipTop .45s ease forwards;
 }
 .flip-card.flip .flip-bottom{
-animation:flipBottom .4s ease .4s forwards;
+animation:flipBottom .45s .45s ease forwards;
 }
 @keyframes flipTop{
 0%{transform:rotateX(0deg);}
@@ -385,12 +392,19 @@ animation:flipBottom .4s ease .4s forwards;
 0%{transform:rotateX(90deg);}
 100%{transform:rotateX(0deg);}
 }
-/* label */
+/* LABEL */
 .flip-container span{
 display:block;
-margin-top:8px;
+margin-top:10px;
 font-size:12px;
-color:#aaa;
+letter-spacing:1px;
+color:#888;
+}
+/* SOFT RED GLOW */
+.flip-card{
+box-shadow:
+0 0 6px rgba(255,40,40,0.15),
+0 0 14px rgba(255,40,40,0.08);
 }
   
 /* LOCATION */
