@@ -267,8 +267,36 @@ object-fit:cover;
 display:block;
 }
 
+/* WEDDING SCHEDULE */
+.wedding-schedule{
+text-align:center;
+margin-top:20px;
+}
+.schedule-date{
+font-size:26px;
+font-weight:700;
+letter-spacing:2px;
+margin-bottom:12px;
+}
+.schedule-time{
+font-size:18px;
+color:#d0d0d0;
+margin-bottom:6px;
+}
+
 /* COUNTDOWN */
-.countdown{font-size:20px;margin-top:10px}
+.countdown-container{
+margin-top:20px;
+}
+#countdown{
+font-size:22px;
+font-weight:600;
+color:#ff2b2b;
+text-shadow:
+0 0 6px rgba(255,0,0,0.8),
+0 0 12px rgba(255,0,0,0.6),
+0 0 20px rgba(255,0,0,0.4);
+}
 
 /* LOCATION */
 .location-box{
@@ -469,9 +497,20 @@ Sekarang persahabatan mereka diuji cinta dan akhirnya nikah.
 <!-- SCHEDULE -->
 <section class="section">
 <h2>Wedding Schedule</h2>
-<p>Akad: 5 April 2026 — 08:00 WIB</p>
-<p>Resepsi: 5 April 2026 — 11:00 WIB</p>
-<div class="countdown" id="countdown"></div>
+<div class="wedding-schedule">
+<div class="schedule-date">
+5 APRIL 2026
+</div>
+<div class="schedule-time">
+Akad 08.00 – 10.00
+</div>
+<div class="schedule-time">
+Resepsi 11.00 – 13.00
+</div>
+<div class="countdown-container">
+<div id="countdown"></div>
+</div>
+</div>
 </section>
 
 <!-- MAP -->
@@ -631,16 +670,20 @@ document.getElementById("popup").classList.remove("show");
 }
 
 /* Countdown */
-const target = new Date("Apr 5, 2026 08:00:00").getTime();
-setInterval(()=>{
-let now=new Date().getTime();
-let gap=target-now;
-let d=Math.floor(gap/(1000*60*60*24));
-let h=Math.floor((gap%(1000*60*60*24))/(1000*60*60));
-let m=Math.floor((gap%(1000*60*60))/(1000*60));
-document.getElementById("countdown").innerText =
-d+" days "+h+" hours "+m+" minutes";
-},1000);
+var weddingDate = new Date("April 5, 2026 08:00:00").getTime();
+var x = setInterval(function() {
+var now = new Date().getTime();
+var distance = weddingDate - now;
+var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+document.getElementById("countdown").innerHTML =
+days + " days " + hours + " hours " + minutes + " minutes";
+if (distance < 0) {
+clearInterval(x);
+document.getElementById("countdown").innerHTML = "Today is the day ❤️";
+}
+}, 1000);
 
 /* RSVP Local Storage */
 const API_URL = "https://script.google.com/macros/s/AKfycbxoj_MOQbrhAPB6tHviVg0_m7ji02dpyRbp_L-ATuo7JopGLhd5jViM0b0O0y4Vqxk/exec";
