@@ -71,6 +71,47 @@ color:#fff;
 cursor:pointer;
 }
 
+  
+.logo-intro{
+width:220px;
+opacity:0;
+filter:
+brightness(0)
+saturate(100%)
+invert(13%)
+sepia(98%)
+saturate(7491%)
+hue-rotate(353deg)
+brightness(94%)
+contrast(119%);
+animation:logoIntro 2.5s ease forwards;
+}
+
+@keyframes logoIntro{
+
+0%{
+opacity:0;
+transform:scale(.8);
+filter:blur(8px) brightness(0);
+}
+
+40%{
+opacity:1;
+transform:scale(1.05);
+filter:blur(2px)
+drop-shadow(0 0 10px #e50914)
+drop-shadow(0 0 25px #e50914);
+}
+
+100%{
+opacity:1;
+transform:scale(1);
+filter:
+drop-shadow(0 0 8px #e50914)
+drop-shadow(0 0 18px #e50914);
+}
+}
+
 /* ================= HERO ================= */
 .hero video{
 width:100%;
@@ -311,7 +352,7 @@ opacity:.7;
 <body>
 
 <div class="loader" id="loader">
-NIKAHFIX
+<img src="nikahfix-logo.png" class="logo-intro">
 <span>sudah diduga semesta...</span>
 </div>
 
