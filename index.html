@@ -270,6 +270,30 @@ display:block;
 /* COUNTDOWN */
 .countdown{font-size:20px;margin-top:10px}
 
+/* LOCATION */
+.location-box{
+margin-bottom:20px;
+}
+
+.location-title{
+font-size:20px;
+font-weight:600;
+color:#ffffff;
+margin-bottom:6px;
+line-height:1.4;
+}
+
+.location-address{
+font-size:14px;
+color:#bdbdbd;
+line-height:1.6;
+}
+
+.map-container iframe{
+filter: invert(90%) hue-rotate(180deg);
+border-radius:10px;
+}
+
 /* RSVP */
 form{display:flex;flex-direction:column;gap:10px}
 input,select,textarea{
@@ -453,9 +477,21 @@ Sekarang persahabatan mereka diuji cinta dan akhirnya nikah.
 <!-- MAP -->
 <section class="section">
 <h2>Location</h2>
-<p>Gedung Serbaguna Mahkamah Konstitusi</p>
-<p>Perumahan Karyawan Mahkamah Konstitusi RI, Jl. RA Kartini No.21-24, RT.005/RW.001, Sepanjang Jaya, Kec. Bekasi Tim., Kota Bks, Jawa Barat 17113</p>
+<div class="location-box">
+<div class="location-title">
+Gedung Serbaguna Mahkamah Konstitusi
+</div>
+<div class="location-address">
+Perumahan Karyawan Mahkamah Konstitusi RI<br>
+Jl. RA Kartini No.21–24<br>
+RT.005/RW.001, Sepanjang Jaya<br>
+Bekasi Timur, Kota Bekasi<br>
+Jawa Barat 17113
+</div>
+</div>
+<div class="map-container">
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0488499231474!2d106.99263057573181!3d-6.257295561264426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698dd31d838819%3A0xea574504f70a30a5!2sGedung%20Serbaguna%20Mahkamah%20Konstitusi!5e0!3m2!1sid!2sid!4v1771476134160!5m2!1sid!2sid" width="100%" height="300" style="border:0;" loading="lazy"></iframe>
+</div>
 </section>
 
 <!-- TANDA KASIH -->
