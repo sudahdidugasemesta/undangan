@@ -321,7 +321,7 @@ flex-wrap:nowrap;
 position:relative;
 width:90px;
 height:90px;
-perspective:800px;
+perspective:1000px;
 }
 
 .card{
@@ -335,6 +335,7 @@ height:100%;
 .flip-top,
 .flip-bottom{
 position:absolute;
+left:0;
 width:100%;
 height:50%;
 display:flex;
@@ -343,9 +344,11 @@ justify-content:center;
 font-size:36px;
 font-weight:600;
 background:#0f0f0f;
-color:#ff3b3b;
+color:#ff4b4b;
+text-shadow:0 0 6px rgba(255,0,0,.3);
 overflow:hidden;
 font-family:'Playfair Display',serif;
+line-height:1;
 }
 
 backface-visibility:hidden;
@@ -388,28 +391,43 @@ top:50%;
 left:0;
 width:100%;
 height:1px;
-background:#1f1f1f;
-z-index:10;
+background:#1a1a1a;
+box-shadow:0 2px 6px rgba(0,0,0,.6);
+z-index:5;
+}
+
+.top,
+.flip-top{
+top:0;
+transform:translateY(25%);
+}
+
+.bottom,
+.flip-bottom{
+bottom:0;
+transform:translateY(-25%);
 }
 
 /* ANIMATION */
 .flip-card.flip .flip-top{
-animation:flipTop .5s ease forwards;
+animation:flipTop .4s ease-in forwards;
 }
+
 .flip-card.flip .flip-bottom{
-animation:flipBottom .5s .5s ease forwards;
+animation:flipBottom .4s .4s ease-out forwards;
 }
+
 @keyframes flipTop{
-0%{transform:rotateX(0deg);}
-100%{transform:rotateX(-90deg);}
+0%{transform:rotateX(0deg)}
+100%{transform:rotateX(-90deg)}
 }
+
 @keyframes flipBottom{
-0%{transform:rotateX(90deg);}
-100%{transform:rotateX(0deg);}
+0%{transform:rotateX(90deg)}
+100%{transform:rotateX(0deg)}
 }
-
-
   
+
 /* LOCATION */
 .location-box{
 margin-bottom:20px;
