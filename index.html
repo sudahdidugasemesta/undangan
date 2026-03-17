@@ -285,104 +285,26 @@ color:#d0d0d0;
 margin-bottom:6px;
 }
 
-/* COUNTDOWN */
-.countdown-container{
-margin-top:20px;
-}
-#countdown{
-font-size:22px;
-font-weight:600;
-color:#ff2b2b;
-text-shadow:
-0 0 6px rgba(255,0,0,0.8),
-0 0 12px rgba(255,0,0,0.6),
-0 0 20px rgba(255,0,0,0.4);
-}
-
-/* FLIP CARD STRUCTURE */
-.flip-container{
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:6px;
-min-width:80px;
-}
-
+/* COUNTDOWN NEW */
 .countdown{
 display:flex;
 justify-content:center;
-align-items:flex-start;
-gap:24px;
+gap:28px;
 margin-top:30px;
-flex-wrap:nowrap;
+}
+
+.flip-unit{
+text-align:center;
 }
 
 .flip-card{
-position:relative;
 width:90px;
-height:120px;
-perspective:1000px;
-overflow:hidden;
-}
-
-.card{
-position:relative;
-width:100%;
-height:100%;
-}
-
-.top,
-.bottom,
-.flip-top,
-.flip-bottom{
-position:absolute;
-left:0;
-width:100%;
-height:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:40px;
-font-weight:600;
+height:110px;
 background:#0f0f0f;
-color:#ff4b4b;
-text-shadow:0 0 6px rgba(255,0,0,.3);
+border-radius:12px;
+position:relative;
 overflow:hidden;
-font-family:'Playfair Display',serif;
-line-height:1;
-backface-visibility:hidden;
-}
-
-.top{
-top:0;
-border-top-left-radius:10px;
-border-top-right-radius:10px;
-border-bottom:1px solid #1f1f1f;
-}
-
-.bottom{
-bottom:0;
-border-bottom-left-radius:10px;
-border-bottom-right-radius:10px;
-}
-
-.flip-top{
-top:0;
-z-index:2;
-transform-origin:bottom;
-}
-
-.flip-bottom{
-bottom:0;
-z-index:1;
-transform-origin:top;
-transform:rotateX(90deg);
-}
-
-.flip-label{
-margin-top:6px;
-font-size:12px;
-color:#888;
+box-shadow:0 10px 25px rgba(0,0,0,.6);
 }
 
 .flip-card::after{
@@ -393,29 +315,36 @@ left:0;
 width:100%;
 height:1px;
 background:#1a1a1a;
-box-shadow:0 2px 8px rgba(0,0,0,.7);
 z-index:5;
 }
 
-/* ANIMATION */
-.flip-card.flip .flip-top{
-animation:flipTop .45s ease-in forwards;
+.top,
+.bottom{
+position:absolute;
+width:100%;
+height:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:42px;
+font-family:'Playfair Display',serif;
+color:#ff4b4b;
+text-shadow:0 0 6px rgba(255,0,0,.25);
 }
 
-.flip-card.flip .flip-bottom{
-animation:flipBottom .45s .45s ease-out forwards;
+.top{
+top:0;
 }
 
-@keyframes flipTop{
-0%{transform:rotateX(0deg)}
-100%{transform:rotateX(-90deg)}
+.bottom{
+bottom:0;
 }
 
-@keyframes flipBottom{
-0%{transform:rotateX(90deg)}
-100%{transform:rotateX(0deg)}
+.label{
+margin-top:8px;
+font-size:13px;
+color:#aaa;
 }
-
 
 /* LOCATION */
 .location-box{
@@ -626,53 +555,36 @@ Resepsi 11.00 – 13.00
 </div>
   
 <div class="countdown">
-  
-<div class="flip-container">
-<div class="flip-card" id="days">
-  <div class="card">
-    
-    <div class="top"></div>
-    <div class="bottom"></div>
-    
-    <div class="flip-top"></div>
-    <div class="flip-bottom"></div>
-  </div>
+
+<div class="flip-unit">
+<div class="flip-card">
+<div class="top" id="days-top">00</div>
+<div class="bottom" id="days-bottom">00</div>
 </div>
-<span>Days</span>
+<div class="label">Days</div>
 </div>
 
-<div class="flip-container">
-<div class="flip-card" id="hours">
-  <div class="card">
-    
-    <div class="top"></div>
-    <div class="bottom"></div>
-    
-    <div class="flip-top"></div>
-    <div class="flip-bottom"></div>
-  </div>
+<div class="flip-unit">
+<div class="flip-card">
+<div class="top" id="hours-top">00</div>
+<div class="bottom" id="hours-bottom">00</div>
 </div>
-<span>Hours</span>
+<div class="label">Hours</div>
 </div>
 
-<div class="flip-container">
-<div class="flip-card" id="minutes">
-  <div class="card">
-    
-    <div class="top"></div>
-    <div class="bottom"></div>
-    
-    <div class="flip-top"></div>
-    <div class="flip-bottom"></div>
-  </div>
+<div class="flip-unit">
+<div class="flip-card">
+<div class="top" id="minutes-top">00</div>
+<div class="bottom" id="minutes-bottom">00</div>
 </div>
-<span>Minutes</span>
+<div class="label">Minutes</div>
 </div>
 
 </div>
 
 </div>
 </section>
+
 
 <!-- MAP -->
 <section class="section">
@@ -831,52 +743,44 @@ document.getElementById("popup").classList.remove("show");
 }
 
 /* Countdown */
-const targetDate = new Date("April 5, 2026 08:00:00").getTime();
-function updateClock(){
-const now = new Date().getTime();
-const diff = targetDate - now;
-const days = Math.floor(diff/(1000*60*60*24));
-const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
-updateFlip("days",days);
-updateFlip("hours",hours);
-updateFlip("minutes",minutes);
+const target = new Date("April 5, 2026 08:00:00").getTime()
+
+function updateCountdown(){
+
+const now = new Date().getTime()
+const diff = target - now
+
+const days = Math.floor(diff/(1000*60*60*24))
+const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60))
+const minutes = Math.floor((diff%(1000*60*60))/(1000*60))
+
+updateUnit("days",days)
+updateUnit("hours",hours)
+updateUnit("minutes",minutes)
+
 }
 
-function updateFlip(id, newValue){
+function updateUnit(id,value){
 
-const flipCard = document.getElementById(id)
-
-const top = flipCard.querySelector(".top")
-const bottom = flipCard.querySelector(".bottom")
-const flipTop = flipCard.querySelector(".flip-top")
-const flipBottom = flipCard.querySelector(".flip-bottom")
+const top = document.getElementById(id+"-top")
+const bottom = document.getElementById(id+"-bottom")
 
 const current = top.innerText
 
-if(current == newValue) return
+if(current != value){
 
-flipTop.innerText = current
-flipBottom.innerText = newValue
-
-flipCard.classList.add("flip")
+top.style.transform="rotateX(-90deg)"
 
 setTimeout(()=>{
-top.innerText = newValue
-bottom.innerText = newValue
-
-// RESET supaya angka lama tidak terlihat
-flipTop.innerText = ""
-flipBottom.innerText = ""
-
-flipCard.classList.remove("flip")
-
-},700)
+top.innerText=value
+bottom.innerText=value
+top.style.transform="rotateX(0deg)"
+},300)
 
 }
-
-updateClock();
-setInterval(updateClock,60000);
+}
+updateCountdown()
+setInterval(updateCountdown,60000)
 
 /* RSVP Local Storage */
 const API_URL = "https://script.google.com/macros/s/AKfycbxoj_MOQbrhAPB6tHviVg0_m7ji02dpyRbp_L-ATuo7JopGLhd5jViM0b0O0y4Vqxk/exec";
