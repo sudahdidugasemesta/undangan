@@ -349,6 +349,56 @@ filter: invert(90%) hue-rotate(180deg);
 border-radius:10px;
 }
 
+
+/* GIFT */
+.gift-container{
+display:flex;
+flex-direction:column;
+gap:24px;
+margin-top:20px;
+}
+
+.gift-card{
+background:#0f0f0f;
+padding:20px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 8px 25px rgba(0,0,0,.5);
+}
+
+.bank-logo{
+width:90px;
+margin-bottom:10px;
+}
+
+.rekening{
+font-size:20px;
+letter-spacing:2px;
+margin:8px 0;
+font-weight:600;
+}
+
+.copy-btn{
+background:#ff4b4b;
+border:none;
+padding:8px 16px;
+border-radius:6px;
+color:white;
+font-size:14px;
+cursor:pointer;
+margin-bottom:8px;
+}
+
+.copy-btn:hover{
+background:#ff2b2b;
+}
+
+.an{
+font-size:14px;
+color:#aaa;
+}
+
+
 /* RSVP */
 form{display:flex;flex-direction:column;gap:10px}
 input,select,textarea{
@@ -579,8 +629,34 @@ Jawa Barat 17113
 <!-- TANDA KASIH -->
 <section class="section">
 <h2>Gift Giving</h2>
-<p>BCA - 12345678 a.n Ghozi</p>
-<p>BTN - 12345678 a.n Silvia</p>
+<div class="gift-container">
+<!-- BCA -->
+<div class="gift-card">
+<img src="bca.png" class="bank-logo">
+
+<div class="rekening">8415068448</div>
+
+<button onclick="copyRek('8415068448')" class="copy-btn">
+Salin Rekening
+</button>
+
+<div class="an">a.n Ghozi Izzuddin</div>
+</div>
+<!-- MANDIRI -->
+<div class="gift-card">
+<img src="mandiri.png" class="bank-logo">
+
+<div class="rekening">12345678</div>
+
+<button onclick="copyRek('12345678')" class="copy-btn">
+Salin Rekening
+</button>
+
+<div class="an">a.n Silvia</div>
+</div>
+
+</div>
+
 </section>
 
 <!-- RSVP -->
@@ -747,6 +823,13 @@ el.classList.remove("flip");
 
 updateCountdown();
 setInterval(updateCountdown,60000);
+
+
+/* GIFT */
+function copyRek(norek){
+navigator.clipboard.writeText(norek);
+alert("Nomor rekening berhasil disalin");
+}
 
 
 /* RSVP Local Storage */
