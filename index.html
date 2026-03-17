@@ -293,58 +293,37 @@ gap:28px;
 margin-top:30px;
 }
 
-.flip-unit{
-text-align:center;
-}
-
-.flip-card{
+.count-box{
 width:90px;
 height:110px;
 background:#0f0f0f;
 border-radius:12px;
-position:relative;
-overflow:hidden;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 box-shadow:0 10px 25px rgba(0,0,0,.6);
 }
 
-.flip-card::after{
-content:"";
-position:absolute;
-top:50%;
-left:0;
-width:100%;
-height:1px;
-background:#1a1a1a;
-z-index:5;
-}
-
-.top,
-.bottom{
-position:absolute;
-width:100%;
-height:50%;
-display:flex;
-align-items:center;
-justify-content:center;
+.count-number{
 font-size:42px;
 font-family:'Playfair Display',serif;
 color:#ff4b4b;
 text-shadow:0 0 6px rgba(255,0,0,.25);
+transition:transform .35s ease, opacity .35s ease;
 }
 
-.top{
-top:0;
+.count-number.flip{
+transform:rotateX(90deg);
+opacity:0;
 }
 
-.bottom{
-bottom:0;
-}
-
-.label{
-margin-top:8px;
+.count-label{
+margin-top:6px;
 font-size:13px;
 color:#aaa;
 }
+
 
 /* LOCATION */
 .location-box{
@@ -556,29 +535,20 @@ Resepsi 11.00 – 13.00
   
 <div class="countdown">
 
-<div class="flip-unit">
-<div class="flip-card">
-<div class="top" id="days-top">00</div>
-<div class="bottom" id="days-bottom">00</div>
-</div>
-<div class="label">Days</div>
-</div>
+  <div class="count-box">
+    <div class="count-number" id="days">00</div>
+    <div class="count-label">Days</div>
+  </div>
 
-<div class="flip-unit">
-<div class="flip-card">
-<div class="top" id="hours-top">00</div>
-<div class="bottom" id="hours-bottom">00</div>
-</div>
-<div class="label">Hours</div>
-</div>
+  <div class="count-box">
+    <div class="count-number" id="hours">00</div>
+    <div class="count-label">Hours</div>
+  </div>
 
-<div class="flip-unit">
-<div class="flip-card">
-<div class="top" id="minutes-top">00</div>
-<div class="bottom" id="minutes-bottom">00</div>
-</div>
-<div class="label">Minutes</div>
-</div>
+  <div class="count-box">
+    <div class="count-number" id="minutes">00</div>
+    <div class="count-label">Minutes</div>
+  </div>
 
 </div>
 
@@ -743,44 +713,41 @@ document.getElementById("popup").classList.remove("show");
 }
 
 /* Countdown */
-const target = new Date("April 5, 2026 08:00:00").getTime()
+const targetDate = new Date("April 5, 2026 08:00:00").getTime();
 
 function updateCountdown(){
 
-const now = new Date().getTime()
-const diff = target - now
+const now = new Date().getTime();
+const diff = targetDate - now;
 
-const days = Math.floor(diff/(1000*60*60*24))
-const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60))
-const minutes = Math.floor((diff%(1000*60*60))/(1000*60))
+const days = Math.floor(diff/(1000*60*60*24));
+const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
 
-updateUnit("days",days)
-updateUnit("hours",hours)
-updateUnit("minutes",minutes)
+updateNumber("days",days);
+updateNumber("hours",hours);
+updateNumber("minutes",minutes);
 
 }
 
-function updateUnit(id,value){
+function updateNumber(id,value){
 
-const top = document.getElementById(id+"-top")
-const bottom = document.getElementById(id+"-bottom")
+const el = document.getElementById(id);
 
-const current = top.innerText
+if(el.innerText == value) return;
 
-if(current != value){
-
-top.style.transform="rotateX(-90deg)"
+el.classList.add("flip");
 
 setTimeout(()=>{
-top.innerText=value
-bottom.innerText=value
-top.style.transform="rotateX(0deg)"
-},300)
+el.innerText=value;
+el.classList.remove("flip");
+},200);
 
 }
-}
-updateCountdown()
-setInterval(updateCountdown,60000)
+
+updateCountdown();
+setInterval(updateCountdown,60000);
+
 
 /* RSVP Local Storage */
 const API_URL = "https://script.google.com/macros/s/AKfycbxoj_MOQbrhAPB6tHviVg0_m7ji02dpyRbp_L-ATuo7JopGLhd5jViM0b0O0y4Vqxk/exec";
