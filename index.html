@@ -309,22 +309,24 @@ margin-top:30px;
 .flip-box{
 text-align:center;
 }
+
 .flip-number{
 width:90px;
 height:90px;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:38px;
-font-weight:700;
+font-size:40px;
+font-weight:600;
 background:#0f0f0f;
 color:#ff3b3b;
 border-radius:10px;
 position:relative;
 box-shadow:
-0 0 10px rgba(255,0,0,0.2),
-0 0 20px rgba(255,0,0,0.1);
-font-family:'Orbitron',sans-serif;
+0 0 10px rgba(255,0,0,0.15),
+0 0 20px rgba(255,0,0,0.08);
+font-family:'Playfair Display',serif;
+transition:transform .5s ease;
 }
 
 /* garis lipatan tengah */
@@ -373,6 +375,20 @@ animation:flipBottom .45s .45s ease forwards;
 100%{transform:rotateX(0deg);}
 }
 
+.flip{
+animation:flipAnim .6s ease;
+}
+@keyframes flipAnim{
+0%{
+transform:rotateX(0deg);
+}
+50%{
+transform:rotateX(90deg);
+}
+100%{
+transform:rotateX(0deg);
+}
+}
   
 /* LOCATION */
 .location-box{
@@ -766,13 +782,25 @@ const diff = targetDate - now;
 const days = Math.floor(diff/(1000*60*60*24));
 const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
 const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
-document.getElementById("days").innerText = days;
-document.getElementById("hours").innerText = hours;
-document.getElementById("minutes").innerText = minutes;
+updateFlip("days",days);
+updateFlip("hours",hours);
+updateFlip("minutes",minutes);
+}
+
+function updateFlip(id,newValue){
+const el = document.getElementById(id);
+if(el.innerText != newValue){
+el.classList.add("flip");
+setTimeout(()=>{
+el.innerText = newValue;
+},250);
+setTimeout(()=>{
+el.classList.remove("flip");
+},600);
+}
 }
 updateClock();
 setInterval(updateClock,60000);
-
 
 /* RSVP Local Storage */
 const API_URL = "https://script.google.com/macros/s/AKfycbxoj_MOQbrhAPB6tHviVg0_m7ji02dpyRbp_L-ATuo7JopGLhd5jViM0b0O0y4Vqxk/exec";
