@@ -588,20 +588,41 @@ Resepsi 11.00 – 13.00
 </div>
   
 <div class="countdown">
-<div class="flip-box">
-<div class="flip-number" id="days">00</div>
-<div class="flip-label">Days</div>
+<div class="flip-container">
+<div class="flip-card" id="days">
+<div class="card">
+<div class="top">00</div>
+<div class="bottom">00</div>
+<div class="flip-top">00</div>
+<div class="flip-bottom">00</div>
 </div>
-<div class="flip-box">
-<div class="flip-number" id="hours">00</div>
-<div class="flip-label">Hours</div>
 </div>
-<div class="flip-box">
-<div class="flip-number" id="minutes">00</div>
-<div class="flip-label">Minutes</div>
+<span>Days</span>
+</div>
+<div class="flip-container">
+<div class="flip-card" id="hours">
+<div class="card">
+<div class="top">00</div>
+<div class="bottom">00</div>
+<div class="flip-top">00</div>
+<div class="flip-bottom">00</div>
+</div>
+</div>
+<span>Hours</span>
+</div>
+<div class="flip-container">
+<div class="flip-card" id="minutes">
+<div class="card">
+<div class="top">00</div>
+<div class="bottom">00</div>
+<div class="flip-top">00</div>
+<div class="flip-bottom">00</div>
+</div>
+</div>
+<span>Minutes</span>
+</div>
 </div>
 
-</div>
 </div>
 </section>
 
@@ -774,18 +795,24 @@ updateFlip("hours",hours);
 updateFlip("minutes",minutes);
 }
 
-function updateFlip(id,newValue){
-const el = document.getElementById(id);
-if(el.innerText != newValue){
-el.classList.add("flip");
+function updateFlip(id,value){
+const card = document.getElementById(id);
+const top = card.querySelector(".top");
+const bottom = card.querySelector(".bottom");
+const flipTop = card.querySelector(".flip-top");
+const flipBottom = card.querySelector(".flip-bottom");
+if(top.innerText != value){
+flipTop.innerText = top.innerText;
+flipBottom.innerText = value;
+card.classList.add("flip");
 setTimeout(()=>{
-el.innerText = newValue;
-},250);
-setTimeout(()=>{
-el.classList.remove("flip");
-},600);
+top.innerText = value;
+bottom.innerText = value;
+card.classList.remove("flip");
+},900);
 }
 }
+
 updateClock();
 setInterval(updateClock,60000);
 
