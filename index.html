@@ -299,82 +299,52 @@ text-shadow:
 0 0 20px rgba(255,0,0,0.4);
 }
   
-/* PREMIUM FLIP CLOCK */
+/* FLIP CLOCK SIMPLE */
 .countdown{
 display:flex;
 justify-content:center;
-gap:18px;
+gap:20px;
 margin-top:30px;
 }
-.flip-container{
+.flip-box{
 text-align:center;
 }
-/* BOX */
-.flip-card{
-position:relative;
-width:85px;
-height:85px;
-perspective:600px;
-}
-/* TOP & BOTTOM */
-.flip-card .top,
-.flip-card .bottom{
-position:absolute;
-left:0;
-width:100%;
-height:50%;
-overflow:hidden;
+.flip-number{
+width:90px;
+height:90px;
 display:flex;
+align-items:center;
 justify-content:center;
-font-size:34px;
-font-weight:600;
+font-size:38px;
+font-weight:700;
 background:#0f0f0f;
 color:#ff3b3b;
-}
-
-.flip-card{
+border-radius:10px;
 position:relative;
-width:85px;
-height:85px;
-perspective:600px;
+box-shadow:
+0 0 10px rgba(255,0,0,0.2),
+0 0 20px rgba(255,0,0,0.1);
+font-family:'Orbitron',sans-serif;
 }
 
-.flip-card .card{
-position:relative;
-width:100%;
-height:100%;
-}
-
-/* TOP */
-.flip-card .top{
-top:0;
-align-items:flex-end;
-border-top-left-radius:10px;
-border-top-right-radius:10px;
-border-bottom:1px solid #1e1e1e;
-}
-/* BOTTOM */
-.flip-card .bottom{
-bottom:0;
-align-items:flex-start;
-border-bottom-left-radius:10px;
-border-bottom-right-radius:10px;
-}
-/* FLIP PART */
-.flip-top,
-.flip-bottom{
+/* garis lipatan tengah */
+.flip-number::after{
+content:"";
 position:absolute;
-left:0;
 width:100%;
-height:50%;
-overflow:hidden;
-display:flex;
-justify-content:center;
-font-size:34px;
-font-weight:600;
-background:#0f0f0f;
-color:#ff3b3b;
+height:1px;
+background:#1f1f1f;
+top:50%;
+left:0;
+box-shadow:0 1px 3px rgba(0,0,0,.8);
 }
+.flip-label{
+margin-top:10px;
+font-size:12px;
+letter-spacing:1px;
+color:#888;
+}
+
 /* ANIMATION PART */
 .flip-top{
 top:0;
@@ -402,25 +372,7 @@ animation:flipBottom .45s .45s ease forwards;
 0%{transform:rotateX(90deg);}
 100%{transform:rotateX(0deg);}
 }
-/* LABEL */
-.flip-container span{
-display:block;
-margin-top:10px;
-font-size:12px;
-letter-spacing:1px;
-color:#888;
-}
-/* SOFT RED GLOW */
-.flip-card{
-box-shadow:
-0 0 8px rgba(255,40,40,0.18),
-0 0 18px rgba(255,40,40,0.12);
-backdrop-filter: blur(4px);
-}
 
-.flip-card{
-font-family:'Orbitron', sans-serif;
-}
   
 /* LOCATION */
 .location-box{
@@ -633,38 +585,17 @@ Resepsi 11.00 – 13.00
 </div>
   
 <div class="countdown">
-<div class="flip-container">
-<div class="flip-card" id="days">
-<div class="card">
-<div class="top">00</div>
-<div class="bottom">00</div>
-<div class="flip-top">00</div>
-<div class="flip-bottom">00</div>
+<div class="flip-box">
+<div class="flip-number" id="days">00</div>
+<div class="flip-label">Days</div>
 </div>
+<div class="flip-box">
+<div class="flip-number" id="hours">00</div>
+<div class="flip-label">Hours</div>
 </div>
-<span>Days</span>
-</div>
-<div class="flip-container">
-<div class="flip-card" id="hours">
-<div class="card">
-<div class="top">00</div>
-<div class="bottom">00</div>
-<div class="flip-top">00</div>
-<div class="flip-bottom">00</div>
-</div>
-</div>
-<span>Hours</span>
-</div>
-<div class="flip-container">
-<div class="flip-card" id="minutes">
-<div class="card">
-<div class="top">00</div>
-<div class="bottom">00</div>
-<div class="flip-top">00</div>
-<div class="flip-bottom">00</div>
-</div>
-</div>
-<span>Minutes</span>
+<div class="flip-box">
+<div class="flip-number" id="minutes">00</div>
+<div class="flip-label">Minutes</div>
 </div>
 
 </div>
@@ -835,31 +766,13 @@ const diff = targetDate - now;
 const days = Math.floor(diff/(1000*60*60*24));
 const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
 const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
-flip("days",days);
-flip("hours",hours);
-flip("minutes",minutes);
+document.getElementById("days").innerText = days;
+document.getElementById("hours").innerText = hours;
+document.getElementById("minutes").innerText = minutes;
 }
-function flip(id,value){
-const el=document.getElementById(id);
-const top=el.querySelector(".top");
-const bottom=el.querySelector(".bottom");
-const flipTop=el.querySelector(".flip-top");
-const flipBottom=el.querySelector(".flip-bottom");
-if(top.innerText!=value){
-flipTop.innerText=top.innerText;
-flipBottom.innerText=value;
-el.classList.add("flip");
-setTimeout(()=>{
-top.innerText=value;
-bottom.innerText=value;
-flipTop.innerText=value;
-flipBottom.innerText=value;
-el.classList.remove("flip");
-},500);
-}
-}
-updateClock(); // jalankan sekali saat load
-setInterval(updateClock,60000); // update setiap 1 menit
+updateClock();
+setInterval(updateClock,60000);
+
 
 /* RSVP Local Storage */
 const API_URL = "https://script.google.com/macros/s/AKfycbxoj_MOQbrhAPB6tHviVg0_m7ji02dpyRbp_L-ATuo7JopGLhd5jViM0b0O0y4Vqxk/exec";
