@@ -843,7 +843,7 @@ updateFlip("hours",hours);
 updateFlip("minutes",minutes);
 }
 
-function updateFlip(id,newValue){
+function updateFlip(id, newValue){
 
 const flipCard = document.getElementById(id)
 
@@ -864,7 +864,13 @@ flipCard.classList.add("flip")
 setTimeout(()=>{
 top.innerText = newValue
 bottom.innerText = newValue
+
+// RESET supaya angka lama tidak terlihat
+flipTop.innerText = ""
+flipBottom.innerText = ""
+
 flipCard.classList.remove("flip")
+
 },700)
 
 }
