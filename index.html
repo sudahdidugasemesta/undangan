@@ -298,73 +298,96 @@ text-shadow:
 0 0 12px rgba(255,0,0,0.6),
 0 0 20px rgba(255,0,0,0.4);
 }
-  
-/* FLIP CLOCK SIMPLE */
-.countdown{
+
+/* FLIP CARD STRUCTURE */
+.flip-container{
 display:flex;
-justify-content:center;
-gap:20px;
-margin-top:30px;
-}
-.flip-box{
-text-align:center;
+flex-direction:column;
+align-items:center;
+gap:8px;
 }
 
-.flip-number{
+.flip-card{
+position:relative;
 width:90px;
 height:90px;
+perspective:800px;
+}
+
+.card{
+position:relative;
+width:100%;
+height:100%;
+}
+
+.top,
+.bottom,
+.flip-top,
+.flip-bottom{
+position:absolute;
+width:100%;
+height:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:40px;
+font-size:36px;
 font-weight:600;
 background:#0f0f0f;
 color:#ff3b3b;
-border-radius:10px;
-position:relative;
-box-shadow:
-0 0 10px rgba(255,0,0,0.15),
-0 0 20px rgba(255,0,0,0.08);
+overflow:hidden;
 font-family:'Playfair Display',serif;
-transition:transform .5s ease;
 }
 
-/* garis lipatan tengah */
-.flip-number::after{
-content:"";
-position:absolute;
-width:100%;
-height:1px;
-background:#1f1f1f;
-top:50%;
-left:0;
-box-shadow:0 1px 3px rgba(0,0,0,.8);
-}
-.flip-label{
-margin-top:10px;
-font-size:12px;
-letter-spacing:1px;
-color:#888;
+backface-visibility:hidden;
 }
 
-/* ANIMATION PART */
+.top{
+top:0;
+border-top-left-radius:10px;
+border-top-right-radius:10px;
+border-bottom:1px solid #1f1f1f;
+}
+
+.bottom{
+bottom:0;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+}
+
 .flip-top{
 top:0;
-align-items:flex-end;
 transform-origin:bottom;
 }
+
 .flip-bottom{
 bottom:0;
-align-items:flex-start;
 transform-origin:top;
 transform:rotateX(90deg);
 }
+
+.flip-label{
+margin-top:6px;
+font-size:12px;
+color:#888;
+}
+
+.flip-card::after{
+content:"";
+position:absolute;
+top:50%;
+left:0;
+width:100%;
+height:1px;
+background:#1f1f1f;
+z-index:10;
+}
+
 /* ANIMATION */
 .flip-card.flip .flip-top{
-animation:flipTop .45s ease forwards;
+animation:flipTop .5s ease forwards;
 }
 .flip-card.flip .flip-bottom{
-animation:flipBottom .45s .45s ease forwards;
+animation:flipBottom .5s .5s ease forwards;
 }
 @keyframes flipTop{
 0%{transform:rotateX(0deg);}
