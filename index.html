@@ -591,10 +591,13 @@ Resepsi 11.00 – 13.00
 <div class="flip-container">
 <div class="flip-card" id="days">
 <div class="card">
+  
 <div class="top">00</div>
 <div class="bottom">00</div>
+
 <div class="flip-top">00</div>
 <div class="flip-bottom">00</div>
+
 </div>
 </div>
 <span>Days</span>
@@ -795,22 +798,22 @@ updateFlip("hours",hours);
 updateFlip("minutes",minutes);
 }
 
-function updateFlip(id,value){
-const card = document.getElementById(id);
-const top = card.querySelector(".top");
-const bottom = card.querySelector(".bottom");
-const flipTop = card.querySelector(".flip-top");
-const flipBottom = card.querySelector(".flip-bottom");
-if(top.innerText != value){
-flipTop.innerText = top.innerText;
-flipBottom.innerText = value;
-card.classList.add("flip");
+function updateFlip(id, newValue){
+const flipCard = document.getElementById(id)
+const top = flipCard.querySelector(".top")
+const bottom = flipCard.querySelector(".bottom")
+const flipTop = flipCard.querySelector(".flip-top")
+const flipBottom = flipCard.querySelector(".flip-bottom")
+const current = top.innerText
+if(current == newValue) return
+flipTop.innerText = current
+flipBottom.innerText = newValue
+flipCard.classList.add("flip")
 setTimeout(()=>{
-top.innerText = value;
-bottom.innerText = value;
-card.classList.remove("flip");
-},900);
-}
+top.innerText = newValue
+bottom.innerText = newValue
+flipCard.classList.remove("flip")
+},600)
 }
 
 updateClock();
